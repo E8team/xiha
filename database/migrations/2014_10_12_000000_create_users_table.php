@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nick_name');
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable()->comment('头像');
             $table->unsignedInteger('jokes_count')->default(0)->index()->commnet('发的笑话数量');
