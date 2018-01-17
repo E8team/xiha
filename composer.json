@@ -8,9 +8,16 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "league/fractal": "^0.17.0",
+        "league/glide-laravel": "^1.0",
+        "overtrue/laravel-filesystem-qiniu": "^1.0",
+        "overtrue/laravel-lang": "^3.0",
+        "ty666/cdn-pusher": "^1.8"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
@@ -24,7 +31,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
