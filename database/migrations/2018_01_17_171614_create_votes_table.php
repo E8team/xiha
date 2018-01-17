@@ -15,6 +15,7 @@ class CreateVotesTable extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id')->index();
             $table->morphs('votable');
             $table->enum('type', ['up_vote', 'down_vote'])->comment('up_vote - 赞， down_vote - 踩');
             $table->timestampsTz();
