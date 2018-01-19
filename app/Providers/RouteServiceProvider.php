@@ -35,6 +35,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        // 注册图片路由
+        Route::get('img/{image}', 'App\Http\Controllers\ImagesController@show')->where('image', '[A-Za-z0-9]{32}\.[A-Za-z0-9]+')->name('image');
+
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
