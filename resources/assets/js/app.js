@@ -18,4 +18,3 @@ new Vue({
   ...App,
   router
 });
-

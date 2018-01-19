@@ -6,8 +6,9 @@ export default {
 };
 </script>
 <style lang="less">
+  @import url(//at.alicdn.com/t/font_548487_himo08fp8btbuik9.css);
   body, html {
-    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
     background: #f3f3f3;
     text-rendering: optimizelegibility;
   }

@@ -23,7 +23,6 @@
 </template>
 
 <style lang="less" scoped>
-@import url(//at.alicdn.com/t/font_548487_u5u3ppcw0so9wwmi.css);
 .comment_item{
   border-bottom: .02133rem solid #eee;
   position: relative;

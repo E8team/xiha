@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { getBaseUrl } from './utils/utils';
+// import { getBaseUrl } from './utils/utils';
 Vue.use(Router);
 
 const router = new Router({
@@ -13,6 +13,10 @@ const router = new Router({
   {
     path: '/user/:id?',
     component: require('./views/User.vue'),
+  },
+  {
+    path: '/login',
+    component: require('./views/Login.vue'),
   },
   {
     path: '/',
