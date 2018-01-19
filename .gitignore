@@ -23,3 +23,4 @@ _ide_helper.php
 package-lock.json
 .DS_Store
 .vscode
+public/js/app.js
