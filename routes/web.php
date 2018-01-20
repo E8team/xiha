@@ -13,4 +13,4 @@
 
 Route::get('oauth/{driver}', 'OAuthController@redirectToProvider');
 Route::get('oauth/{driver}/callback', 'OAuthController@handleProviderCallback')->name('oauth.callback');
-Route::get('/', 'IndexController@index');
+Route::get('/{path?}', 'IndexController@index')->where('path', '[\/\w\.-]*')->name('index');
