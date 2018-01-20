@@ -8,7 +8,7 @@
       </div>
       <p class="text">嘻哈是一个原创的笑话分享社区, 分享的搞笑段子、搞笑图片大全。一切爆笑尽在嘻哈。</p>
       <div class="btn_wrapper">
-        <button class="button github"><i class="iconfont icon-github"></i>GitHub账号登陆</button>
+        <a href="/oauth/github" class="button github"><i class="iconfont icon-github"></i>GitHub账号登陆</a>
       </div>
     </section>
   </div>
@@ -50,12 +50,14 @@ export default {
   }
   .btn_wrapper{
     padding: 0 20px;
+    padding-bottom: 20px;
   }
   .button{
+    display: block;
     border: 0;
     border-radius: 4px;
-    height: 50px;
-    line-height: 32px;
+    height: 45px;
+    line-height: 45px;
     font-size: 14px;
     position: relative;
     padding: 0 16px;
@@ -78,7 +80,6 @@ export default {
     outline: none;
     &.github{
       background: #4A4A4A;
-      margin-bottom: 20px;
       color: #fff;
       .iconfont{
         font-size: 20px;

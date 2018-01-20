@@ -9,7 +9,8 @@
 <body>
 <h1>{{ $user->username }} 登录中...</h1>
 <script>
-    var jwtToken = "{!! $token !!}";
+    localStorage.setItem('jwt_token', "{!! $token !!}");
+    location.href = '/';
 </script>
 </body>
 </html>

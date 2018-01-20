@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "fastclick": "^1.0.6",
     "normalize.css": "^7.0.0",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0"
