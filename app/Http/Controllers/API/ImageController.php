@@ -22,12 +22,13 @@ class ImageController extends APIController
     {
         $image = $request->file($this->imageService->uploadKey());
 
-        if (is_null($image) || $image->isValid()) {
+        if (is_null($image) || !$image->isValid()) {
             $error = $image ? $image->getErrorMessage() : '图片上传失败';
             throw new ImageUploadException($error);
         }
 
         $imageModel = $this->imageService->store($image, auth()->id());
+
         return [
             'image_hash' => $imageModel->hash,
             'image_url' => $imageModel->url

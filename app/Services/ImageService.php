@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Models\Image;
 use Illuminate\Container\Container;
-use Illuminate\Http\File;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
+use Symfony\Component\HttpFoundation\File\File;
 
 class ImageService
 {
