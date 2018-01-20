@@ -29,7 +29,7 @@ class OAuthController extends Controller
      */
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->redirect();
+        return Socialite::driver($driver)->stateless()->redirect();
     }
 
     public function handleProviderCallback($driver)
@@ -37,7 +37,7 @@ class OAuthController extends Controller
         /**
          * @var \Laravel\Socialite\Two\User $user
          */
-        $user = Socialite::driver($driver)->user();
+        $user = Socialite::driver($driver)->stateless()->user();
         $username = $user->offsetGet('login');
         $userModel = User::where('username', $username)->first();
         if (is_null($userModel)) {
@@ -53,6 +53,7 @@ class OAuthController extends Controller
             ]);
             Image::where('hash', $imageHash)->update(['creator_id' => $userModel->id]);
         }
+
         $token = $this->guard()->login($userModel);
         return view('logging', ['access_token' => $token, 'expires_in' => $this->guard()->factory()->getTTL() * 60, 'user' => $userModel]);
     }

@@ -24,6 +24,7 @@ class AuthController extends APIController
      */
     public function refresh()
     {
+        // 如果 refresh 过期会抛出 Tymon\\JWTAuth\\Exceptions\\TokenExpiredException
         return $this->respondWithToken($this->guard()->refresh());
     }
 

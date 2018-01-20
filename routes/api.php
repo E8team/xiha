@@ -19,6 +19,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('logout', 'AuthController@logout');
     });
 
+    Route::post('ajax_upload_image', 'ImageController@upload');
+
     Route::get('me', 'MeController@show');
 
     Route::apiResource('jokes', 'JokesController');
