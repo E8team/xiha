@@ -1,6 +1,13 @@
 /node_modules
 /public/hot
 /public/storage
+/public/css
+/public/fonts
+/public/js/*
+/public/images
+/public/mix-manifest.json
+/public/static/*
+/public/vendor
 /storage/*.key
 /vendor
 /.idea
@@ -10,7 +17,10 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+composer.lock
 .phpstorm.meta.php
 _ide_helper.php
+package-lock.json
 .DS_Store
 .vscode
+public/js/app.js
