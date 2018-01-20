@@ -6,8 +6,8 @@ use App\Models\Image;
 use App\Models\User;
 use App\Services\ImageService;
 use Carbon\Carbon;
-use Illuminate\Http\File;
 use Socialite;
+use Auth;
 
 class OAuthController extends Controller
 {
@@ -39,11 +39,11 @@ class OAuthController extends Controller
          */
         $user = Socialite::driver($driver)->user();
         $username = $user->offsetGet('login');
-
-        if (User::where('username', $username)->count() <= 0) {
+        $userModel = User::where('username', $username)->first();
+        if (is_null($userModel)) {
             $imageHash = app(ImageService::class)->store($user->getAvatar());
             // 注册
-            $user = User::create([
+            $userModel = User::create([
                 'username' => $username,
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
@@ -51,7 +51,19 @@ class OAuthController extends Controller
                 'avatar' => $imageHash,
                 'last_active_at' => Carbon::now()
             ]);
-            Image::where('hash', $imageHash)->update(['creator_id' => $user->id]);
+            Image::where('hash', $imageHash)->update(['creator_id' => $userModel->id]);
         }
+        $token = $this->guard()->login($user);
+        return view('');
+    }
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\Guard
+     */
+    public function guard()
+    {
+        return Auth::guard();
     }
 }
