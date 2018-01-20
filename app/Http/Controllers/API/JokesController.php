@@ -30,8 +30,9 @@ class JokesController extends APIController implements VoteController
         $data['content'] = e($data['content']);
         $data['user_id'] = auth()->id();
         JokeModel::create($data);
-        return response()->make(null, 201);
+        return response()->make(null, Response::HTTP_CREATED);
     }
+
 
     public function retrieveModel($key)
     {
