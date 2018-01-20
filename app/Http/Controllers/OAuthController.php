@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Image;
+use App\Models\User;
+use App\Services\ImageService;
+use Carbon\Carbon;
+use Illuminate\Http\File;
 use Socialite;
-use Auth;
 
 class OAuthController extends Controller
 {
@@ -31,7 +34,24 @@ class OAuthController extends Controller
 
     public function handleProviderCallback($driver)
     {
+        /**
+         * @var \Laravel\Socialite\Two\User $user
+         */
         $user = Socialite::driver($driver)->user();
-        // $user->token;
+        $username = $user->offsetGet('login');
+
+        if (User::where('username', $username)->count() <= 0) {
+            $imageHash = app(ImageService::class)->store($user->getAvatar());
+            // 注册
+            $user = User::create([
+                'username' => $username,
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'github_url' => $user->offsetGet('html_url'),
+                'avatar' => $imageHash,
+                'last_active_at' => Carbon::now()
+            ]);
+            Image::where('hash', $imageHash)->update(['creator_id' => $user->id]);
+        }
     }
 }

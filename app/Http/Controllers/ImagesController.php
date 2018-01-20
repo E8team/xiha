@@ -12,13 +12,12 @@ class ImagesController extends Controller
 {
     public function show(Server $server, $path, Request $request)
     {
-        try{
+        try {
             return $server->getImageResponse(
                 substr($path, 0, 2) . DIRECTORY_SEPARATOR . $path,
                 $request->all());
-        }catch (FileNotFoundException $e){
+        } catch (FileNotFoundException $e) {
             abort(404, '图片不存在');
         }
-
     }
 }

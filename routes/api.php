@@ -18,4 +18,10 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function (){
         Route::post('refresh', 'AuthController@refresh');
         Route::post('logout', 'AuthController@logout');
     });
+
+    Route::apiResource('jokes', 'JokesController');
+    Route::put('jokes/{joke}/up_vote', 'JokesController@upVote');
+    Route::put('jokes/{joke}/down_vote', 'JokesController@downVote');
+    Route::put('jokes/{joke}/cancel_vote', 'JokesController@cancelVote');
+
 });
