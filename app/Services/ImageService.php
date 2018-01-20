@@ -87,7 +87,7 @@ class ImageService
 
     protected function retrieveImageByHash($hash)
     {
-        return Image::where('hash', $hash)->find();
+        return Image::where('hash', $hash)->first();
     }
 
     protected function hash(File $image)
