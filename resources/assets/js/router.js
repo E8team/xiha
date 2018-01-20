@@ -19,6 +19,10 @@ const router = new Router({
     component: require('./views/Login.vue'),
   },
   {
+    path: '/publish',
+    component: require('./views/Publish.vue'),
+  },
+  {
     path: '/',
     component: require('./views/Home.vue'),
   }]
