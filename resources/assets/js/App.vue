@@ -2,7 +2,7 @@
   <router-view></router-view>
 </template>
 <script>
-import { isLogin } from './utils/utils'
+import { isLogin } from './utils/utils';
 export default {
   mounted () {
     if (isLogin()) {

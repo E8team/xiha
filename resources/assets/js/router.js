@@ -7,14 +7,9 @@ const router = new Router({
   mode: 'history',
   base: getBaseUrl(),
   routes: [{
-    path: '/joke/:id',
+    path: '/j/:id',
     name: 'joke',
     component: require('./views/JokeDetail.vue'),
-  },
-  {
-    path: '/user/:id?',
-    name: 'user',
-    component: require('./views/User.vue'),
   },
   {
     path: '/login',
@@ -25,6 +20,11 @@ const router = new Router({
     path: '/publish',
     name: 'publish',
     component: require('./views/Publish.vue'),
+  },
+  {
+    path: '/:id',
+    name: 'user',
+    component: require('./views/User.vue'),
   },
   {
     path: '/',

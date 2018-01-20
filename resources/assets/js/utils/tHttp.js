@@ -52,9 +52,9 @@ tHttp.install = (Vue, {baseURL, router}) => {
     return response;
   }, (error) => {
     if (error.code === 'ECONNABORTED') {
-      Vue.prototype.$Message('请求超时');
+      Vue.prototype.$message('请求超时');
     } else if (error.response.status === 401) {
-      Vue.prototype.$Message('请先登录');
+      Vue.prototype.$message('请先登录');
     } else if (error.response.status === 422) {
       let errorsTemp = error.response.data.errors;
       for (let index in errorsTemp) {
@@ -65,7 +65,7 @@ tHttp.install = (Vue, {baseURL, router}) => {
         return Promise.reject(error);
       }
       if (error.response.data.message) {
-        Vue.prototype.$Message('出错了');
+        Vue.prototype.$message(error.response.data.message);
       }
     }
     return Promise.reject(error);

@@ -26,13 +26,7 @@ export default {
   },
   computed: {
     user () {
-      if (this.$store.state.me) {
-        return this.$store.state.me;
-      } else {
-        this.$store.dispatch('updateMe');
-        return {};
-      }
-      
+      return this.$store.state.me || {};
     },
   },
 };
