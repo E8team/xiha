@@ -2,10 +2,10 @@
   <router-view></router-view>
 </template>
 <script>
-
+import { isLogin } from './utils/utils'
 export default {
   mounted () {
-    if (location.search.includes('logined')) {
+    if (isLogin()) {
       this.$store.dispatch('updateMe');
     }
   }

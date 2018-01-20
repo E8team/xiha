@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import { getBaseUrl } from './utils/utils';
+import { getBaseUrl } from './utils/utils';
 Vue.use(Router);
 
 const router = new Router({
-  // mode: 'history',
-  // base: getBaseUrl(),
+  mode: 'history',
+  base: getBaseUrl(),
   routes: [{
     path: '/joke/:id',
     name: 'joke',

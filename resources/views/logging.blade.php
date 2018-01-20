@@ -14,7 +14,7 @@
     localStorage.setItem('jwt_token', "{!! $access_token !!}");
     localStorage.setItem('expiry_time', new Date().getTime() + expiresIn * 1000);
     
-    location.href = '/?logined';
+    location.href = '/';
     
 </script>
 </body>

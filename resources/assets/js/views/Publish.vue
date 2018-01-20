@@ -1,11 +1,11 @@
 <template>
   <div class="publish">
     <header>
-      <div class="cancel" href="#">取消</div>
+      <div class="cancel" @click="$router.back()">取消</div>
       <button class="publish_btn">发布</button>
     </header>
     <div class="input_wrapper">
-      <textarea placeholder="请开始你的表演" rows="6"></textarea>
+      <textarea v-model="joke.content" placeholder="请开始你的表演" rows="6"></textarea>
       <UploadImage></UploadImage>
     </div>
   </div>
@@ -14,7 +14,15 @@
 <script>
 import UploadImage from '../components/UploadImage.vue';
 export default {
-  components: { UploadImage }
+  components: { UploadImage },
+  data () {
+    return {
+      joke: {
+        content: null,
+        image: null
+      }
+    };
+  }
 };
 </script>
 

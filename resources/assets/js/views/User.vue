@@ -3,13 +3,13 @@
     <TNav></TNav>
     <div class="user_info_block">
       <div class="cover">
-        <img src="https://avatars.githubusercontent.com/u/15799365?v=3" alt="">
+        <img :src="user.avatar_url" :alt="user.name">
       </div>
-      <h1>魂锁典狱长</h1>
+      <h1>{{user.name}} <a class="github_link" :href="user.github_url"><i class="iconfont icon-github"></i></a></h1>
       <p class="intro">口中疾呼烫烫烫</p>
       <footer>
         <ul>
-          <li class="active">投稿</li>
+          <li class="active">投稿 <span class="tip">({{user.jokes_count}})</span></li>
           <li>回复</li>
           <li>赞</li>
         </ul>
@@ -23,7 +23,18 @@ import TNav from '../components/TNav.vue';
 export default {
   components: {
     TNav
-  }
+  },
+  computed: {
+    user () {
+      if (this.$store.state.me) {
+        return this.$store.state.me;
+      } else {
+        this.$store.dispatch('updateMe');
+        return {};
+      }
+      
+    },
+  },
 };
 </script>
 
@@ -43,6 +54,10 @@ export default {
     text-align: center;
     font-size: 20px;
     margin-bottom: 17px;
+    .github_link{
+      text-decoration: none;
+      color: #333;
+    }
   }
   .intro{
     font-size: 14px;
@@ -63,6 +78,10 @@ export default {
         color: #818181;
         padding: 15px;
         position: relative;
+        >.tip{
+          color: #777;
+          font-size: 14px;
+        }
         &.active{
           font-weight: bold;
           color: #2D2D2F;

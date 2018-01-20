@@ -1,16 +1,28 @@
 <template>
   <header>
     <div @click="$router.push({name: 'home'})" class="logo">嘻哈</div>
-    <!-- <router-link class="login_btn" :to="{name: 'login'}">登录 · 注册</router-link> -->
-
-    <div @click="$router.push({name: 'user'})" class="cover_wrapper">
-      <img src="https://gitee.com/uploads/4/634804_3twd.png?1465007207" alt="">
-    </div>
-    <div @click="$router.push({name: 'publish'})" class="publish_btn">
-      <i class="iconfont icon-tianjia"></i>
-    </div>
+    <router-link v-if="!me" class="login_btn" :to="{name: 'login'}">登录 · 注册</router-link>
+    <template v-else>
+      <div @click="$router.push({name: 'user'})" class="cover_wrapper">
+        <img :src="me.avatar_url" :alt="me.name">
+      </div>
+      <div @click="$router.push({name: 'publish'})" class="publish_btn">
+        <i class="iconfont icon-tianjia"></i>
+      </div>
+    </template>
   </header>
 </template>
+
+<script>
+export default {
+  name: 'TNav',
+  computed: {
+    me () {
+      return this.$store.state.me;
+    },
+  },
+};
+</script>
 
 <style lang="less" scoped>
   header{
