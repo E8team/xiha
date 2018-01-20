@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
 class IndexController extends Controller
 {

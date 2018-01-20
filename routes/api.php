@@ -14,5 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['namespace' => 'API', 'as' => 'api.'], function (){
-
+    Route::group(['as' => 'auth.', 'prefix'=>'auth'], function (){
+        Route::post('refresh', 'AuthController@refresh');
+        Route::post('logout', 'AuthController@logout');
+    });
 });
