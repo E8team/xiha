@@ -16,7 +16,7 @@ class CreateJokesTable extends Migration
         Schema::create('jokes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
-            $table->char('image', 32)->nullable();
+            $table->char('image_hash', 32)->nullable();
             $table->unsignedInteger('comments_count')->default(0)->index()->comment('评论数');
             $table->unsignedInteger('votes_count')->default(0)->index();
             $table->text('content')->commnet('内容');

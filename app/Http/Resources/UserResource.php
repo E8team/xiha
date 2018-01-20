@@ -19,10 +19,10 @@ class UserResource extends Resource
             'name' => $this->name,
             'username' => $this->username,
             // 'email' => $this->email,
-            /*$this->mergeWhen($this->resource->relationLoaded('avatarImage'), [
-                'avatar_url' => $this->avatarImage->url
+            /*$this->mergeWhen($this->resource->relationLoaded('avatar'), [
+                'avatar_url' => $this->avatar->url
             ]),*/
-            'avatar_url' => $this->avatarImage->url,
+            'avatar_url' => $this->avatar->url,
             'github_url' => $this->github_url,
             'jokes_count' => $this->jokes_count,
             'votes_count' => $this->votes_count,

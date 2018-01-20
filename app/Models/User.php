@@ -27,7 +27,7 @@ class User extends BaseModel implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'avatar', 'github_url', 'last_active_at'
+        'name', 'email', 'username', 'avatar_hash', 'github_url', 'last_active_at'
     ];
 
     protected $dates = ['last_active_at'];
@@ -61,8 +61,8 @@ class User extends BaseModel implements
         return [];
     }
 
-    public function avatarImage()
+    public function avatar()
     {
-        return $this->hasOne(Image::class, 'hash', 'avatar');
+        return $this->hasOne(Image::class, 'hash', 'avatar_hash');
     }
 }
