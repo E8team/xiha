@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
-use App\Http\Resources\User;
+use App\Http\Resources\UserResource;
 
 
 class MeController extends APIController
@@ -15,7 +15,6 @@ class MeController extends APIController
 
     public function show()
     {
-        return new User(auth()->user());
+        return new UserResource(auth()->user());
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 if (!function_exists('image_url')) {
 
     function image_url($imageId, $style = null, $default = null)
@@ -58,6 +57,7 @@ if (!function_exists('image_url')) {
     }
 
 }
+
 
 if (!function_exists('toIso8601String')) {
     function toIso8601String($date)

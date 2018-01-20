@@ -8,11 +8,15 @@ use App\Http\Controllers\Traits\Vote;
 use App\Http\Requests\JokeRequest;
 use App\Http\Resources\Joke;
 use App\Models\Joke as JokeModel;
+use Symfony\Component\HttpFoundation\Response;
 
 class JokesController extends APIController implements VoteController
 {
-    use Vote {
-        voted as protected voted;
+    use Vote;
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('store');
     }
 
     public function show(JokeModel $joke)
@@ -20,10 +24,13 @@ class JokesController extends APIController implements VoteController
         return new Joke($joke);
     }
 
-
     public function store(JokeRequest $request)
     {
-        // JokeModel::create($request->validated());
+        $data = $request->validated();
+        $data['content'] = e($data['content']);
+        $data['user_id'] = auth()->id();
+        JokeModel::create($data);
+        return response()->setStatusCode(Response::HTTP_CREATED);
     }
 
     public function retrieveModel($key)
