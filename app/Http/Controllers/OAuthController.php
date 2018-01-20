@@ -54,7 +54,7 @@ class OAuthController extends Controller
             Image::where('hash', $imageHash)->update(['creator_id' => $userModel->id]);
         }
         $token = $this->guard()->login($userModel);
-        return view('logging', ['token' => $token, 'user' => $userModel]);
+        return view('logging', ['access_token' => $token, 'expires_in' => $this->guard()->factory()->getTTL() * 60, 'user' => $userModel]);
     }
 
     /**

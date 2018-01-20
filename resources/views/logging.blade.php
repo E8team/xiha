@@ -9,7 +9,8 @@
 <body>
 <h1>{{ $user->username }} 登录中...</h1>
 <script>
-    var jwtToken = "{!! $token !!}";
+    var jwtToken = "{!! $access_token !!}";
+    var expiresIn = "{!! $expires_in !!}";
 </script>
 </body>
 </html>
