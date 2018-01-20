@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email');
             // $table->string('password');
-            $table->char('avatar', 32)->nullable()->comment('头像');
+            $table->char('avatar_hash', 32)->nullable()->comment('头像');
             $table->string('github_url')->nullable();
             $table->unsignedInteger('jokes_count')->default(0)->index()->commnet('发的笑话数量');
             $table->unsignedInteger('votes_count')->default(0)->index();

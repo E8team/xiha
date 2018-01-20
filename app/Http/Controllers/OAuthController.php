@@ -48,7 +48,7 @@ class OAuthController extends Controller
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'github_url' => $user->offsetGet('html_url'),
-                'avatar' => $image->hash,
+                'avatar_hash' => $image->hash,
                 'last_active_at' => Carbon::now()
             ]);
             Image::where('hash', $image->hash)->update(['creator_id' => $userModel->id]);
