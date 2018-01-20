@@ -14,14 +14,13 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('path')->comment('存储路径');
+            $table->char('hash', 32)->primary();
             $table->string('mime')->nullable()->comment('MIME 类型');
-            $table->boolean('cdn_enabled')->default(false);
+            $table->string('ext')->nullable()->comment('扩展名');
             $table->string('title')->comment('文件名');
             $table->unsignedMediumInteger('width')->nullable()->comment('宽度');
             $table->unsignedMediumInteger('height')->nullable()->comment('高度');
-            $table->unsignedInteger('creator_id')->comment('创建者');
+            $table->unsignedInteger('creator_id')->nullable()->comment('创建者');
             $table->timestampsTz();
         });
     }

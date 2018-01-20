@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Models\Traits;
+namespace App\Http\Controllers\Traits;
+
+use App\Events\Voted;
 
 trait Vote
 {
@@ -8,6 +10,7 @@ trait Vote
     {
         $model = $this->retrieveModel($key);
         auth()->user()->upVote($model);
+        $this->voted($model);
         return $this->voteResponse($model);
     }
 
@@ -15,6 +18,7 @@ trait Vote
     {
         $model = $this->retrieveModel($key);
         auth()->user()->upVote($model);
+        $this->voted($model);
         return $this->voteResponse($model);
 
     }
@@ -23,12 +27,18 @@ trait Vote
     {
         $model = $this->retrieveModel($key);
         auth()->user()->upVote($model);
+        $this->voted($model);
         return $this->voteResponse($model);
     }
 
     /**
      * 此方法可以自行覆盖
      */
+    public function voted($model)
+    {
+        event(new Voted($model, $this));
+    }
+
     public function voteResponse($model)
     {
         return response()->json([

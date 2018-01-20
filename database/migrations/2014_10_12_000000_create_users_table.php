@@ -17,13 +17,15 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('password');
-            $table->string('avatar')->nullable()->comment('头像');
+            $table->string('email');
+            // $table->string('password');
+            $table->char('avatar', 32)->nullable()->comment('头像');
+            $table->string('github_url')->nullable();
             $table->unsignedInteger('jokes_count')->default(0)->index()->commnet('发的笑话数量');
             $table->unsignedInteger('votes_count')->default(0)->index();
             $table->unsignedInteger('views_count')->default(0)->index();
             $table->timestampTz('last_active_at')->nullable();
-            $table->rememberToken();
+            // $table->rememberToken();
             $table->timestampsTz();
         });
     }

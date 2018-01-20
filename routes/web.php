@@ -11,6 +11,6 @@
 |
 */
 
+Route::get('oauth/{driver}', 'OAuthController@redirectToProvider');
+Route::get('oauth/{driver}/callback', 'OAuthController@handleProviderCallback')->name('oauth.callback');
 Route::get('/', 'IndexController@index');
-Route::get('oauth/{driver}', 'AuthController@redirectToProvider');
-Route::get('oauth/{driver}/callback', 'AuthController@handleProviderCallback')->name('oauth.callback');
