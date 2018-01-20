@@ -9,8 +9,13 @@
 <body>
 <h1>{{ $user->username }} 登录中...</h1>
 <script>
-    var jwtToken = "{!! $access_token !!}";
     var expiresIn = "{!! $expires_in !!}";
+
+    localStorage.setItem('jwt_token', "{!! $access_token !!}");
+    localStorage.setItem('expiry_time', new Date().getTime() + expiresIn * 1000);
+    
+    location.href = '/';
+    
 </script>
 </body>
 </html>

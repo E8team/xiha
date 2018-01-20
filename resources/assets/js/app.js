@@ -4,6 +4,12 @@ import router from './router';
 import App from './App.vue';
 import 'normalize.css';
 import { getBaseUrl } from './utils/utils';
+import confirm from './components/confirm';
+import message from './components/message';
+import FastClick from 'fastclick';
+
+Vue.prototype.$message = message;
+Vue.prototype.$confirm = confirm;
 
 // 获取baseUrl
 let baseUrl = getBaseUrl();
@@ -18,3 +24,4 @@ new Vue({
   ...App,
   router
 });
+FastClick.attach(document.body);
