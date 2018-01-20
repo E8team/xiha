@@ -3,6 +3,9 @@
 </template>
 <script>
 export default {
+  mounted () {
+    this.$http.get('test');
+  }
 };
 </script>
 <style lang="less">

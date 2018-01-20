@@ -12,18 +12,41 @@ tHttp.install = (Vue, {baseURL, router}) => {
     baseURL
   };
   tHttp.config['X-CSRF-TOKEN'] = token.content;
-  let headers = {
-    'X-Requested-With': 'XMLHttpRequest',
-  };
+  let auth = {};
   let jwtToken = localStorage.getItem('jwt_token');
   if (jwtToken) {
-    headers.Authorization = 'Bearer ' + jwtToken;
+    auth = {
+      Authorization: 'Bearer ' + jwtToken
+    };
   }
   Vue.prototype.$http = axios.create({
     baseURL,
     timeout: 6000,
     responseType: 'json',
-    headers
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      ...auth
+    }
+  });
+  Vue.prototype.$http.interceptors.request.use((config) => {
+    if (config.url.replace(config.baseURL, '') === 'auth/refresh') {
+      return config;
+    }
+    let expiryTime = localStorage.getItem('expiry_time');
+    if (!expiryTime) {
+      return config;
+    }
+    (async () => {
+      if (new Date().getTime > Number(expiryTime)) {
+        // jwt_token已经过期
+        let res = await Vue.prototype.$http.post('auth/refresh');
+        Vue.prototype.$http.defaults.headers.Authorization = 'Bearer ' + res.data;
+        localStorage.setItem('jwt_token', res.data);
+      }
+    })();
+    return config;
+  }, (error) => {
+    return Promise.reject(error);
   });
   Vue.prototype.$http.interceptors.response.use((response) => {
     return response;

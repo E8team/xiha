@@ -8,18 +8,22 @@ const router = new Router({
   // base: getBaseUrl(),
   routes: [{
     path: '/joke/:id',
+    name: 'joke',
     component: require('./views/JokeDetail.vue'),
   },
   {
     path: '/user/:id?',
+    name: 'user',
     component: require('./views/User.vue'),
   },
   {
     path: '/login',
+    name: 'login',
     component: require('./views/Login.vue'),
   },
   {
     path: '/publish',
+    name: 'publish',
     component: require('./views/Publish.vue'),
   },
   {

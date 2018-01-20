@@ -6,6 +6,7 @@ export function getCsrfToken () {
   const tokenMeta = document.head.querySelector('meta[name="csrf-token"]');
   return tokenMeta ? tokenMeta.content : '';
 }
+
 export function strLimit (str, limit, end = '...') {
   if (!str) {
     return '';
