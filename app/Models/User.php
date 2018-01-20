@@ -30,6 +30,8 @@ class User extends BaseModel implements
         'name', 'email', 'username', 'avatar', 'github_url', 'last_active_at'
     ];
 
+    protected $dates = ['last_active_at'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -57,5 +59,10 @@ class User extends BaseModel implements
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function avatarImage()
+    {
+        return $this->hasOne(Image::class, 'hash', 'avatar');
     }
 }

@@ -13,11 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['namespace' => 'API', 'as' => 'api.'], function (){
-    Route::group(['as' => 'auth.', 'prefix'=>'auth'], function (){
+Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
+    Route::group(['as' => 'auth.', 'prefix' => 'auth'], function () {
         Route::post('refresh', 'AuthController@refresh');
         Route::post('logout', 'AuthController@logout');
     });
+
+    Route::get('me', 'MeController@show');
 
     Route::apiResource('jokes', 'JokesController');
     Route::put('jokes/{joke}/up_vote', 'JokesController@upVote');
