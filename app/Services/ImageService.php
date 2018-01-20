@@ -28,12 +28,13 @@ class ImageService
         }
 
         $hash = $this->hash($image);
-        if ($this->isNotExist($hash)) {
+        $imageModel = $this->retrieveImageByHash($hash);
+        if (is_null($imageModel)) {
             $this->storeToDisk($hash, $image);
-            $this->storeToDatabase($hash, $image, $creatorId);
+            $imageModel = $this->storeToDatabase($hash, $image, $creatorId);
         }
         @unlink($image->getRealPath());
-        return $hash;
+        return $imageModel;
     }
 
     protected function isUrl($url)
@@ -65,7 +66,7 @@ class ImageService
     {
 
         list($width, $height) = getimagesize($image->getRealPath());
-        Image::create([
+        return Image::create([
             'hash' => $hash,
             'mime' => $image->getMimeType(),
             'ext' => $image->guessExtension(),
@@ -84,14 +85,9 @@ class ImageService
         );
     }
 
-    protected function isNotExist($hash)
+    protected function retrieveImageByHash($hash)
     {
-        return !$this->isExist($hash);
-    }
-
-    protected function isExist($hash)
-    {
-        return Image::where('hash', $hash)->count() > 0;
+        return Image::where('hash', $hash)->find();
     }
 
     protected function hash(File $image)

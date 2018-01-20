@@ -27,7 +27,10 @@ class ImageController extends APIController
             throw new ImageUploadException($error);
         }
 
-        $hash = $this->imageService->store($image, auth()->id());
-        return ['hash' => $hash];
+        $imageModel = $this->imageService->store($image, auth()->id());
+        return [
+            'image_hash' => $imageModel->hash,
+            'image_url' => $imageModel->url
+        ];
     }
 }
