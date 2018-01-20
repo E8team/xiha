@@ -53,7 +53,7 @@ class OAuthController extends Controller
             ]);
             Image::where('hash', $imageHash)->update(['creator_id' => $userModel->id]);
         }
-        $token = $this->guard()->login($user);
+        $token = $this->guard()->login($userModel);
         return view('logging', ['token' => $token, 'user' => $user]);
     }
 
