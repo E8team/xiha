@@ -28,6 +28,7 @@ const router = new Router({
   },
   {
     path: '/',
+    name: 'home',
     component: require('./views/Home.vue'),
   }]
 });
