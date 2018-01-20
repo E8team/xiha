@@ -19,7 +19,7 @@ class CreateJokesTable extends Migration
             $table->char('image_hash', 32)->nullable();
             $table->unsignedInteger('comments_count')->default(0)->index()->comment('评论数');
             $table->unsignedInteger('votes_count')->default(0)->index();
-            $table->text('content')->nullable()->commnet('内容');
+            $table->text('content')->commnet('内容');
             $table->timestampsTz();
             $table->foreign('user_id')
                 ->references('id')->on('users')

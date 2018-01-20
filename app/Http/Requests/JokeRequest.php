@@ -29,13 +29,13 @@ class JokeRequest extends FormRequest
                 return [];
             case 'POST':
                 return [
-                    'content' => 'required_without_all:image_hash|min:1|max:2000',
-                    'image_hash' => 'bail|required_without_all:content|size:32|exists:images,hash'
+                    'content' => 'required_without_all:image_hash|nullable|max:2000',
+                    'image_hash' => 'bail|required_without_all:content|nullable|size:32|exists:images,hash'
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
-                    'content' => 'nullable|min:1|max:2000',
+                    'content' => 'nullable|max:2000',
                     'image_hash' => 'bail|nullable|size:32|exists:images,hash'
                 ];
             default:

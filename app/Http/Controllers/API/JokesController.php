@@ -27,7 +27,7 @@ class JokesController extends APIController implements VoteController
     public function store(JokeRequest $request)
     {
         $data = $request->validated();
-        $data['content'] = e($data['content']);
+        $data['content'] = isset($data['content']) ? e($data['content']) : '';
         $data['user_id'] = auth()->id();
         Joke::create($data);
         return response()->make(null, Response::HTTP_CREATED);
