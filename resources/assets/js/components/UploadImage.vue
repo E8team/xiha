@@ -1,10 +1,10 @@
 <template>
   <div class="upload_image">
-    <div class="preview">
-      <div class="close_btn"></div>
-      <img src="https://i0.hdslb.com/bfs/album/85adc060bbcaf74086022b65092ef3cdbcb8c2bc.jpg@1036w_1e_1c.webp">
+    <div v-if="src" class="preview">
+      <div @click="close" class="close_btn"></div>
+      <img :src="src">
     </div>
-    <div class="upload_btn">
+    <div v-else class="upload_btn">
       <input @change="upload" type="file">
     </div>
   </div>
@@ -13,9 +13,26 @@
 <script>
 export default {
   name: 'UploadImage',
+  data () {
+    return {
+      src: null
+    };
+  },
   methods: {
-    upload (files) {
-      console.log(files);
+    close () {
+      this.src = null;
+      this.$emit('change', null);
+    },
+    async upload ({ srcElement: { files: {0: file} } }) {
+      let formData = new FormData();
+      formData.append('image', file);
+      this.src = window.URL.createObjectURL(file);
+      try {
+        let res = await this.$http.post('ajax_upload_image', formData);
+        this.$emit('change', res.data.image_hash);
+      } catch (e) {
+        this.src = null;
+      }
     }
   }
 };

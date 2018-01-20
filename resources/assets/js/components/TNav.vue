@@ -3,7 +3,7 @@
     <div @click="$router.push({name: 'home'})" class="logo">嘻哈</div>
     <router-link v-if="!me" class="login_btn" :to="{name: 'login'}">登录 · 注册</router-link>
     <template v-else>
-      <div @click="$router.push({name: 'user'})" class="cover_wrapper">
+      <div @click="$router.push({name: 'user', params: {id: me.username}})" class="cover_wrapper">
         <img :src="me.avatar_url" :alt="me.name">
       </div>
       <div @click="$router.push({name: 'publish'})" class="publish_btn">
