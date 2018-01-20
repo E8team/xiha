@@ -41,17 +41,17 @@ class OAuthController extends Controller
         $username = $user->offsetGet('login');
         $userModel = User::where('username', $username)->first();
         if (is_null($userModel)) {
-            $imageHash = app(ImageService::class)->store($user->getAvatar());
+            $image = app(ImageService::class)->store($user->getAvatar());
             // 注册
             $userModel = User::create([
                 'username' => $username,
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'github_url' => $user->offsetGet('html_url'),
-                'avatar' => $imageHash,
+                'avatar' => $image->hash,
                 'last_active_at' => Carbon::now()
             ]);
-            Image::where('hash', $imageHash)->update(['creator_id' => $userModel->id]);
+            Image::where('hash', $image->hash)->update(['creator_id' => $userModel->id]);
         }
 
         $token = $this->guard()->login($userModel);
