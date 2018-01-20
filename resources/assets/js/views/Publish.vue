@@ -17,7 +17,7 @@ export default {
   components: { UploadImage },
   computed: {
     canPublish () {
-      return !(!!this.joke.content || !!this.joke.image_hash)
+      return !(!!this.joke.content || !!this.joke.image_hash);
     }
   },
   data () {
