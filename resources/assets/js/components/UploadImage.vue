@@ -5,7 +5,7 @@
       <img src="https://i0.hdslb.com/bfs/album/85adc060bbcaf74086022b65092ef3cdbcb8c2bc.jpg@1036w_1e_1c.webp">
     </div>
     <div class="upload_btn">
-      <input type="file">
+      <input @change="upload" type="file">
     </div>
   </div>
 </template>
@@ -13,6 +13,11 @@
 <script>
 export default {
   name: 'UploadImage',
+  methods: {
+    upload (files) {
+      console.log(files);
+    }
+  }
 };
 </script>
 
