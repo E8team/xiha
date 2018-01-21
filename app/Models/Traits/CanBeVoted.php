@@ -23,14 +23,14 @@ trait CanBeVoted
     {
         $this->cancelVote($user);
         $this->voters()->create(['user_id' => $user->id, 'type' => $type]);
-        $this->changes[$type]++;
+        $this->voteChanges[$type]++;
     }
 
     public function cancelVote($item)
     {
         $vote = $this->voters()->select('id', 'type')->where('user_id', $this->id)->first();
         if (!is_null($vote)) {
-            $item->changes[$vote->type]--;
+            $item->voteChanges[$vote->type]--;
             $vote->delete();
         }
     }
