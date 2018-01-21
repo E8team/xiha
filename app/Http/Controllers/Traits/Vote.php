@@ -8,41 +8,41 @@ trait Vote
 {
     public function upVote($key)
     {
-        $model = $this->retrieveModel($key);
-        auth()->user()->upVote($model);
-        $this->voted($model);
-        return $this->voteResponse($model);
+        $votable = $this->retrieveModel($key);
+        auth()->user()->upVote($votable);
+        $this->voted($votable);
+        return $this->voteResponse($votable);
     }
 
     public function downVote($key)
     {
-        $model = $this->retrieveModel($key);
-        auth()->user()->downVote($model);
-        $this->voted($model);
-        return $this->voteResponse($model);
+        $votable = $this->retrieveModel($key);
+        auth()->user()->downVote($votable);
+        $this->voted($votable);
+        return $this->voteResponse($votable);
 
     }
 
     public function cancelVote($key)
     {
-        $model = $this->retrieveModel($key);
-        auth()->user()->cancelVote($model);
-        $this->voted($model);
-        return $this->voteResponse($model);
+        $votable = $this->retrieveModel($key);
+        auth()->user()->cancelVote($votable);
+        $this->voted($votable);
+        return $this->voteResponse($votable);
     }
 
     /**
      * 此方法可以自行覆盖
      */
-    public function voted($model)
+    public function voted($votable)
     {
-        event(new Voted($model, $this));
+        event(new Voted($votable, $this));
     }
 
-    public function voteResponse($model)
+    public function voteResponse($votable)
     {
         return response()->json([
-            'up_count' => $model->countUpVoters()
+            'up_count' => $votable->countUpVoters()
         ]);
     }
 }
