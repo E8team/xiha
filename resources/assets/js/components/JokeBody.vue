@@ -52,7 +52,7 @@ export default {
     async downVote () {
       let res;
       if (!this.joke.me_vote || this.joke.me_vote.type !== 'down_vote') {
-        res = await this.$http.put(`jokes/${this.joke.id}/down_vote`);        
+        res = await this.$http.put(`jokes/${this.joke.id}/down_vote`);
         this.joke.me_vote = { type: 'down_vote' };
       } else {
         res = await this.$http.put(`jokes/${this.joke.id}/cancel_vote`);

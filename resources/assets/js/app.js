@@ -9,12 +9,17 @@ import message from './components/message';
 import FastClick from 'fastclick';
 import Vuex from 'vuex';
 import store from './vuex/store';
+import VueScroller from 'vue-scroller';
+import VueContentPlaceholders from 'vue-content-placeholders';
+
 Vue.prototype.$message = message;
 Vue.prototype.$confirm = confirm;
 
 // 获取baseUrl
 let baseUrl = getBaseUrl();
 
+Vue.use(VueContentPlaceholders);
+Vue.use(VueScroller);
 Vue.use(tHttp, {
   baseURL: baseUrl + 'api/',
   router
