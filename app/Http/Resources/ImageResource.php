@@ -20,7 +20,9 @@ class ImageResource extends Resource
             'width' => $this->width,
             'height' => $this->height,
             'url' => $this->getUrl(),
-            'cover_url' => $this->getUrl('cover_url')
+            'cover_url' => $this->getUrl('cover_url'),
+            'is_gif' => str_contains($this->mime, 'gif'),
+            'is_high' => ''
         ];
     }
 }

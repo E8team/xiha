@@ -16,7 +16,7 @@ class JokesController extends APIController implements VoteController
 
     public function __construct()
     {
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->only('store', 'upVote', 'downVote', 'cancelVote');
     }
 
     public function index()
@@ -27,7 +27,7 @@ class JokesController extends APIController implements VoteController
 
     public function show(Joke $joke)
     {
-        return new JokeResource($joke);
+        return new JokeResource($joke->load('user'));
     }
 
     public function store(JokeRequest $request)
