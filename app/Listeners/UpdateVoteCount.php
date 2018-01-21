@@ -25,7 +25,7 @@ class UpdateVoteCount
      */
     public function handle(Voted $event)
     {
-        $upVoteChange = $event->votable->voteChanges['up_vote'];
+        $upVoteChange = $event->change['up_vote'];
         if ($upVoteChange > 0) {
             $event->votable->increment('votes', $upVoteChange);
             $event->votable->user->increment('votes', $upVoteChange);

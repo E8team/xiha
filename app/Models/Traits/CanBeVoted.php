@@ -8,28 +8,34 @@ trait CanBeVoted
 {
     public function upVote($user)
     {
-        $this->vote($user, 'up_vote');
+        return $this->vote($user, 'up_vote');
     }
 
     public function downVote($user)
     {
-        $this->vote($user, 'down_vote');
+        return $this->vote($user, 'down_vote');
     }
 
     protected function vote($user, $type)
     {
-        $this->cancelVote($user);
+        $changes = $this->cancelVote($user);
         $this->voters()->create(['user_id' => $user->id, 'type' => $type]);
-        $this->voteChanges[$type]++;
+        $changes[$type]++;
+        return $changes;
     }
 
     public function cancelVote($item)
     {
+        $changes = [
+            'up_vote' => 0,
+            'down_vote' => 0
+        ];
         $vote = $this->voters()->select('id', 'type')->where('user_id', $this->id)->first();
         if (!is_null($vote)) {
-            $item->voteChanges[$vote->type]--;
+            $changes[$vote->type]--;
             $vote->delete();
         }
+        return $changes;
     }
 
 

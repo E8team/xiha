@@ -16,16 +16,18 @@ class Voted
 
     public $votable;
     public $user;
+    public $change;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($votable, $user)
+    public function __construct($votable, $user, $change)
     {
         $this->votable = $votable;
         $this->user = $user;
+        $this->change = $change;
     }
 
     /**

@@ -9,41 +9,42 @@ trait Vote
     public function upVote($key)
     {
         $votable = $this->retrieveModel($key);
-        auth()->user()->upVote($votable);
-        $this->voted($votable);
-        return $this->voteResponse($votable);
+        $change = auth()->user()->upVote($votable);
+        $this->voted($votable, $change);
+        return $this->voteResponse($votable, $change);
     }
 
     public function downVote($key)
     {
         $votable = $this->retrieveModel($key);
-        auth()->user()->downVote($votable);
-        $this->voted($votable);
-        return $this->voteResponse($votable);
+        $change = auth()->user()->downVote($votable);
+        $this->voted($votable, $change);
+        return $this->voteResponse($votable, $change);
 
     }
 
     public function cancelVote($key)
     {
         $votable = $this->retrieveModel($key);
-        auth()->user()->cancelVote($votable);
-        $this->voted($votable);
-        return $this->voteResponse($votable);
+        $change = auth()->user()->cancelVote($votable);
+        $this->voted($votable, $change);
+        return $this->voteResponse($votable, $change);
     }
 
     /**
      * 此方法可以自行覆盖
      */
-    public function voted($votable)
+    public function voted($votable, $change)
     {
-        event(new Voted($votable, $this));
+        event(new Voted($votable, $this, $change));
     }
 
-    public function voteResponse($votable)
+    public function voteResponse($votable, $change)
     {
         return response()->json([
             // todo 这里可以搞一个接口
-            'up_count' => $votable->votes_count
+            'up_count' => $votable->votes_count,
+            'up_change' => $change['up_vote']
         ]);
     }
 }

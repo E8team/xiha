@@ -10,25 +10,25 @@ trait Vote
     public function upVote($votable)
     {
         $this->checkVotable($votable);
-        $votable->upVote($this);
+        return $votable->upVote($this);
     }
 
     public function downVote($votable)
     {
         $this->checkVotable($votable);
-        $votable->downVote($this);
+        return $votable->downVote($this);
     }
 
     protected function vote($votable, $type)
     {
         $this->checkVotable($votable);
-        $votable->vote($this, $type);
+        return $votable->vote($this, $type);
     }
 
     public function cancelVote($votable)
     {
         $this->checkVotable($votable);
-        $votable->cancelVote($this);
+        return $votable->cancelVote($this);
     }
 
     public function checkVotable($item)

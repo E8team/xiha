@@ -9,15 +9,6 @@ class Joke extends BaseModel
 {
     use CanBeVoted;
 
-    /**
-     * 这个暂且放到这里
-     * @var array
-     */
-    public $voteChanges = [
-        'up_vote' => 0,
-        'down_vote' => 0
-    ];
-
     protected $fillable = ['user_id', 'image_hash', 'content'];
 
     public function image()
