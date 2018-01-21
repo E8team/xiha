@@ -42,7 +42,8 @@ trait Vote
     public function voteResponse($votable)
     {
         return response()->json([
-            'up_count' => $votable->countUpVoters()
+            // todo 这里可以搞一个接口
+            'up_count' => $votable->votes_count
         ]);
     }
 }

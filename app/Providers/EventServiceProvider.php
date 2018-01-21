@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\Voted;
+use App\Listeners\UpdateVoteCount;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -14,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Voted::class => [
-            'App\Listeners\EventListener',
+            UpdateVoteCount::class
         ],
     ];
 
