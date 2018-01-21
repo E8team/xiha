@@ -7,6 +7,7 @@
       </div>
       <h1>{{user.name}} <a class="github_link" :href="user.github_url"><i class="iconfont icon-github"></i></a></h1>
       <p class="intro">口中疾呼烫烫烫</p>
+      <button v-if="isMine" @click="$router.push({name: 'userSettings'})" class="edit_btn"><i class="iconfont icon-bianji"></i> 编辑资料</button>
       <footer>
         <ul>
           <li class="active">投稿 <span class="tip">({{user.jokes_count}})</span></li>
@@ -24,11 +25,28 @@ export default {
   components: {
     TNav
   },
-  computed: {
-    user () {
-      return this.$store.state.me || {};
-    },
+  data () {
+    return {
+      user: {}
+    }
   },
+  computed: {
+    isMine () {
+      if (this.$store.state.me) {
+        return this.$store.state.me.username === this.$route.params.id;
+      }
+    }
+  },
+  mounted () {
+    if (this.isMine) {
+      this.user = this.$store.state.me;
+    } else {
+      (async () => {
+        let res = await this.$http.get(`users/${this.$route.params.id}`);
+        this.user = res.data.data;
+      })();
+    }
+  }
 };
 </script>
 
@@ -57,6 +75,18 @@ export default {
     font-size: 14px;
     color: #72777b;
     text-align: center;
+  }
+  .edit_btn{
+    width: 130px;
+    height: 35px;
+    margin: 20px auto 0;
+    display: block;
+    background-color: #fff;
+    color: #3780f7;
+    border-radius: 3px;
+    border: 0;
+    outline: none;
+    border: 1px solid currentColor;
   }
   footer{
     margin-top: 10px;

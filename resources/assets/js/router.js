@@ -22,6 +22,11 @@ const router = new Router({
     component: require('./views/Publish.vue'),
   },
   {
+    path: '/user/settings',
+    name: 'userSettings',
+    component: require('./views/UserSettings.vue'),
+  },
+  {
     path: '/:id',
     name: 'user',
     component: require('./views/User.vue'),
