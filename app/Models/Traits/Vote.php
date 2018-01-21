@@ -9,27 +9,26 @@ trait Vote
 {
     public function upVote($item)
     {
-        $this->vote($item, 'up_vote');
+        $this->checkVoteItem($item);
+        $item->upVote($this);
     }
 
     public function downVote($item)
     {
-        $this->vote($item, 'down_vote');
+        $this->checkVoteItem($item);
+        $item->downVote($this);
     }
 
     protected function vote($item, $type)
     {
         $this->checkVoteItem($item);
-        $this->cancelVote($item);
-        $item->voters()->create(['user_id' => $this->id, 'type' => $type]);
+        $item->vote($this, $type);
     }
 
     public function cancelVote($item)
     {
-        $queryBuilder = $item->voters()->where('user_id', $this->id);
-        if ($queryBuilder->count() > 0) {
-            $queryBuilder->delete();
-        }
+        $this->checkVoteItem($item);
+        $item->cancelVote($this);
     }
 
     public function checkVoteItem($item)

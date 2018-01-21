@@ -4,6 +4,38 @@ namespace App\Models\Traits;
 
 trait CanBeVoted
 {
+    public $voteChanges = [
+        'up_vote' => 0,
+        'down_vote' => 0
+    ];
+
+    public function upVote($user)
+    {
+        $this->vote($user, 'up_vote');
+    }
+
+    public function downVote($user)
+    {
+        $this->vote($user, 'down_vote');
+    }
+
+    protected function vote($user, $type)
+    {
+        $this->cancelVote($user);
+        $this->voters()->create(['user_id' => $user->id, 'type' => $type]);
+        $this->changes[$type]++;
+    }
+
+    public function cancelVote($item)
+    {
+        $vote = $this->voters()->select('id', 'type')->where('user_id', $this->id)->find();
+        if (!is_null($vote)) {
+            $item->changes[$vote->type]--;
+            $vote->delete();
+        }
+    }
+
+
     /**
      * Check if user is voted by given user.
      *
@@ -48,7 +80,7 @@ trait CanBeVoted
     {
         $voters = $this->voters();
 
-        if(!is_null($type)) $voters->where('type', $type);
+        if (!is_null($type)) $voters->where('type', $type);
 
         return $voters->count();
     }
