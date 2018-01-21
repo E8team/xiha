@@ -21,8 +21,8 @@ class JokesController extends APIController implements VoteController
 
     public function index()
     {
-        $jokes = Joke::latest()->paginate($this->perPage());
-        return new JokeCollection($jokes->load('image','user', 'user.avatar'));
+        $jokes = Joke::latest()->with('image', 'user', 'user.avatar')->paginate($this->perPage());
+        return new JokeCollection($jokes);
     }
 
     public function show(Joke $joke)
