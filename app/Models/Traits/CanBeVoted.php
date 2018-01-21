@@ -2,6 +2,8 @@
 
 namespace App\Models\Traits;
 
+use App\Models\User;
+
 trait CanBeVoted
 {
     public $voteChanges = [
@@ -43,10 +45,25 @@ trait CanBeVoted
      *
      * @return bool
      */
-    public function isVotedBy($user)
+    public function isVotedByLazy($user)
     {
         //todo 这里貌似把所有的投票者都要查询出来
         return $this->voters->contains($user);
+    }
+
+    /**
+     * Check if user is voted by given user.
+     *
+     * @param $user
+     *
+     * @return bool
+     */
+    public function isVotedBy($user)
+    {
+        if ($user instanceof User) {
+            $user = $user->id;
+        }
+        return $this->voters()->where('user_id', $user)->count() > 0;
     }
 
     /**
