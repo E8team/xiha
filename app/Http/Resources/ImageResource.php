@@ -22,7 +22,8 @@ class ImageResource extends Resource
             'url' => $this->getUrl(),
             'cover_url' => $this->getUrl('cover_url'),
             'is_gif' => str_contains($this->mime, 'gif'),
-            'is_high' => ''
+            // 高宽比大于等于 3 认为是长图
+            'is_high' => $this->height / $this->width >= 3
         ];
     }
 }
