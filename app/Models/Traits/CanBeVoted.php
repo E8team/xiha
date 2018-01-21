@@ -6,11 +6,6 @@ use App\Models\User;
 
 trait CanBeVoted
 {
-    public $voteChanges = [
-        'up_vote' => 0,
-        'down_vote' => 0
-    ];
-
     public function upVote($user)
     {
         $this->vote($user, 'up_vote');
