@@ -3,7 +3,7 @@
     <TNav></TNav>
     <div class="user_info_block">
       <div class="cover">
-        <img :src="user.avatar_url" :alt="user.name">
+        <img :src="user.avatar && user.avatar.cover_url" :alt="user.name">
       </div>
       <h1>{{user.name}} <a class="github_link" :href="user.github_url"><i class="iconfont icon-github"></i></a></h1>
       <p class="intro">口中疾呼烫烫烫</p>

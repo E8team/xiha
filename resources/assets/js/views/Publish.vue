@@ -31,8 +31,10 @@ export default {
   methods: {
     async publish () {
       try {
-        await this.$http.post('jokes', this.joke);
+        let res = await this.$http.post('jokes', this.joke);
         this.$message({type: 'success', msg: '发布成功！'});
+        this.$router.push({name: 'joke', params: {id: res.data.data.id}});
+        this.$store.commit('UPDATE_LAST_PUBLISH_JOKE', res.data.data);
       } catch (e) {}
     }
   }
