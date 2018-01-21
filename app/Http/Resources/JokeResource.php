@@ -22,7 +22,7 @@ class JokeResource extends Resource
             'comments_count' => $this->comments_count,
             'votes_count' => $this->votes_count,
             $this->mergeWhen(auth()->check(), function () {
-                return ['is_voted_by' => $this->isVotedBy(auth()->user())];
+                return ['me_vote' => new VoteResource(auth()->user()->getVoteByVotable($this->resource))];
             }),
             'content' => $this->content,
             'updated_at' => toIso8601String($this->updated_at),

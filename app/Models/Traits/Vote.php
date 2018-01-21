@@ -7,33 +7,46 @@ use App\Exceptions\NotVotable;
 
 trait Vote
 {
-    public function upVote($item)
+    public function upVote($votable)
     {
-        $this->checkVoteItem($item);
-        $item->upVote($this);
+        $this->checkVoteItem($votable);
+        $votable->upVote($this);
     }
 
-    public function downVote($item)
+    public function downVote($votable)
     {
-        $this->checkVoteItem($item);
-        $item->downVote($this);
+        $this->checkVoteItem($votable);
+        $votable->downVote($this);
     }
 
-    protected function vote($item, $type)
+    protected function vote($votable, $type)
     {
-        $this->checkVoteItem($item);
-        $item->vote($this, $type);
+        $this->checkVoteItem($votable);
+        $votable->vote($this, $type);
     }
 
-    public function cancelVote($item)
+    public function cancelVote($votable)
     {
-        $this->checkVoteItem($item);
-        $item->cancelVote($this);
+        $this->checkVoteItem($votable);
+        $votable->cancelVote($this);
     }
 
-    public function checkVoteItem($item)
+    public function checkVotable($item)
     {
         if ($item instanceof \Illuminate\Database\Eloquent\Model && !method_exists($item, 'voters'))
             throw new NotVotable();
+    }
+
+    public function getVoteByVotable($votable)
+    {
+        if ($votable instanceof \App\Models\Vote) {
+            $votable = $votable->id;
+        }
+        return $this->votable()->where('votable_id', $votable)->first();
+    }
+
+    public function votable()
+    {
+        return $this->belongsTo(\App\Models\Vote::class);
     }
 }
