@@ -65,4 +65,14 @@ class User extends BaseModel implements
     {
         return $this->hasOne(Image::class, 'hash', 'avatar_hash');
     }
+
+    /**
+     * 为路由模型获取键名。
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
 }

@@ -6,9 +6,9 @@ use App\Http\Controllers\APIController;
 use App\Http\Controllers\Contracts\VoteController;
 use App\Http\Controllers\Traits\Vote;
 use App\Http\Requests\JokeRequest;
+use App\Http\Resources\JokeCollection;
 use App\Http\Resources\JokeResource;
 use App\Models\Joke;
-use Symfony\Component\HttpFoundation\Response;
 
 class JokesController extends APIController implements VoteController
 {
@@ -19,7 +19,13 @@ class JokesController extends APIController implements VoteController
         $this->middleware('auth')->only('store');
     }
 
-    public function show(JokeModel $joke)
+    public function index()
+    {
+        $jokes = Joke::latest()->paginate($this->perPage());
+        return new JokeCollection($jokes->load('image','user'));
+    }
+
+    public function show(Joke $joke)
     {
         return new JokeResource($joke);
     }
@@ -29,8 +35,7 @@ class JokesController extends APIController implements VoteController
         $data = $request->validated();
         $data['content'] = isset($data['content']) ? e($data['content']) : '';
         $data['user_id'] = auth()->id();
-        Joke::create($data);
-        return response()->make(null, Response::HTTP_CREATED);
+        return new JokeResource(Joke::create($data)->load('image'));
     }
 
 

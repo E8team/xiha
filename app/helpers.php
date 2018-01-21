@@ -37,15 +37,14 @@ if (!function_exists('image_url')) {
             }
 
             if (!empty($style)) {
-
                 if (isset($style['q'])) {
                     $q = "q/{$style['q']}|imageslim";
                 } else {
                     $q = '';
                 }
-                // $parameters = "?imageView2/1/w/{$style['w']}/h/{$style['h']}" . $q;
+                // $parameters = "?imageView2/1/w/{$style['w']}/h/{$style['h']}/format/$style['fm']" . $q;
 
-                $parameters = '?imageView2/1/' . (isset($style['w']) ? "w/{$style['w']}/" : '') . (isset($style['h']) ? "h/{$style['h']}/" : '') . $q;
+                $parameters = '?imageView2/1/' . (isset($style['w']) ? "w/{$style['w']}/" : '') . (isset($style['h']) ? "h/{$style['h']}/" : '') . (isset($style['fm']) ? "format/{$style['fm']}" : '') . $q;
 
             } else {
                 $parameters = '';

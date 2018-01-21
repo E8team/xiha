@@ -15,6 +15,6 @@ class MeController extends APIController
 
     public function show()
     {
-        return new UserResource(auth()->user());
+        return new UserResource(auth()->user()->load('avatar'));
     }
 }

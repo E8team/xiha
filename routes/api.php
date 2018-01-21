@@ -28,4 +28,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::put('jokes/{joke}/down_vote', 'JokesController@downVote');
     Route::put('jokes/{joke}/cancel_vote', 'JokesController@cancelVote');
 
+    Route::get('users/{user}', 'UsersController@show');
+    Route::get('users/{user}/jokes', 'UsersController@jokes');
+
 });

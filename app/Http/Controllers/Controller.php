@@ -10,4 +10,21 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * 分页时每页显示多少数据
+     *
+     * @return int
+     */
+    public function perPage($default = null)
+    {
+        $maxPerPage = config('xiha.max_per_page');
+        $perPage = (request('per_page') ?: $default) ?: $this->defaultPerPage();
+        return (int)($perPage < $maxPerPage ? $perPage : $maxPerPage);
+    }
+
+    public function defaultPerPage()
+    {
+        return config('xiha.default_per_page');
+    }
 }

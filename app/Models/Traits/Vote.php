@@ -34,7 +34,7 @@ trait Vote
 
     public function checkVoteItem($item)
     {
-        if ($item instanceof \Illuminate\Database\Eloquent\Model && method_exists($item, 'voters'))
+        if ($item instanceof \Illuminate\Database\Eloquent\Model && !method_exists($item, 'voters'))
             throw new NotVotable();
     }
 }

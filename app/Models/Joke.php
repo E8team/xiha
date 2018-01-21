@@ -15,4 +15,17 @@ class Joke extends BaseModel
     {
         return $this->hasOne(Image::class, 'hash', 'image_hash');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeByUser($query, $user)
+    {
+        if ($user instanceof User)
+            $user = $user->id;
+        $query->where('user_id', $user);
+    }
+
 }

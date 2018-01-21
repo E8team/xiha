@@ -8,6 +8,8 @@ use League\Glide\Responses\LaravelResponseFactory;
 use League\Glide\ServerFactory;
 use Storage;
 use Schema;
+use DB;
+use Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        if ($this->app->environment() !== 'production') {
+            DB::listen(function ($query) {
+                $sql = str_replace('?', '%s', $query->sql);
+                foreach ($query->bindings as $binding) {
+                    $binding = (string)$binding;
+                }
+                $sql = sprintf($sql, ...$query->bindings);
+                Log::info('sql', [$sql, $query->time, url()->current()]);
+            });
+        }
     }
 
     /**
