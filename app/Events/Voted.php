@@ -14,7 +14,7 @@ class Voted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $model;
+    public $votable;
     public $user;
 
     /**
@@ -22,9 +22,9 @@ class Voted
      *
      * @return void
      */
-    public function __construct($model, $user)
+    public function __construct($votable, $user)
     {
-        $this->model = $model;
+        $this->votable = $votable;
         $this->user = $user;
     }
 

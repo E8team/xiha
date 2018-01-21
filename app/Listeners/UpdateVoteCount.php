@@ -25,6 +25,8 @@ class UpdateVoteCount
      */
     public function handle(Voted $event)
     {
+        if ($event->votable->voteChanges['up_vote'] != 0) {
 
+        }
     }
 }

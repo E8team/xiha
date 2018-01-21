@@ -28,7 +28,7 @@ trait CanBeVoted
 
     public function cancelVote($item)
     {
-        $vote = $this->voters()->select('id', 'type')->where('user_id', $this->id)->find();
+        $vote = $this->voters()->select('id', 'type')->where('user_id', $this->id)->first();
         if (!is_null($vote)) {
             $item->changes[$vote->type]--;
             $vote->delete();
