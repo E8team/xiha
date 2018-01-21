@@ -1,10 +1,11 @@
 <template>
   <div class="joke_detail">
     <TNav></TNav>
-    <JokeBody :joke="joke"></JokeBody>
+    <JokeBody v-if="joke" :joke="joke"></JokeBody>
+    <JokeBodyPlaceholders v-else/>
     <div class="comment">
       <header>
-        <h3>评论<span class="comment_num">({{joke.comments_count}})</span></h3>
+        <h3>评论<span class="comment_num">({{joke && joke.comments_count}})</span></h3>
       </header>
       <CommentItem />
     </div>
@@ -15,11 +16,12 @@
 import TNav from '../components/TNav.vue';
 import JokeBody from '../components/JokeBody.vue';
 import CommentItem from '../components/CommentItem.vue';
+import JokeBodyPlaceholders from '../components/JokeBodyPlaceholders.vue';
 export default {
-  components: { TNav, JokeBody, CommentItem },
+  components: { TNav, JokeBody, CommentItem, JokeBodyPlaceholders },
   data () {
     return {
-      joke: {}
+      joke: null
     };
   },
   mounted () {

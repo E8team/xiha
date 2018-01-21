@@ -8,22 +8,16 @@
       :on-infinite="infinite">
       <JokeBody :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
     </scroller>
-    <template  v-else>
-      <div v-for="n in 3" :key="n" class="content_placeholders_wrapper">
-        <content-placeholders>
-          <content-placeholders-heading :img="true" />
-          <content-placeholders-text :lines="3" />
-        </content-placeholders>
-      </div>
-    </template>
+    <JokeBodyPlaceholders v-else :length="3"/>
   </div>
 </template>
 
 <script>
 import TNav from '../components/TNav.vue';
 import JokeBody from '../components/JokeBody.vue';
+import JokeBodyPlaceholders from '../components/JokeBodyPlaceholders.vue';
 export default {
-  components: { TNav, JokeBody },
+  components: { TNav, JokeBody, JokeBodyPlaceholders },
   data () {
     return {
       jokes: [],
@@ -60,10 +54,5 @@ export default {
 .scroller{
   margin-top: 50px;
 }
-.content_placeholders_wrapper{
-  background-color: #fff;
-  padding: 10px;
-  box-shadow: 0 1px 3px rgba(26,26,26,.1);
-  margin-bottom: 10px;
-}
+
 </style>
