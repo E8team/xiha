@@ -39,10 +39,9 @@ trait Vote
 
     public function getVoteByVotable($votable)
     {
-        if ($votable instanceof \App\Models\Vote) {
-            $votable = $votable->id;
-        }
-        return $this->votable()->where('votable_id', $votable)->first();
+        // todo 这里需要改一下
+        return \App\Models\Vote::where('user_id', $this->id)->where('votable_id', $votable->id)->first();
+        // return $this->votable()->where('votable_id', $votable->id)->first();
     }
 
     public function votable()
