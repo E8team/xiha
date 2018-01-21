@@ -10,7 +10,7 @@ interface VoteController
 
     public function cancelVote($key);
 
-    public function voted($model);
+    public function voted($votable, $change);
 
     public function retrieveModel($key);
 }
