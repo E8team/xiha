@@ -17,7 +17,7 @@ trait Vote
     public function downVote($key)
     {
         $model = $this->retrieveModel($key);
-        auth()->user()->upVote($model);
+        auth()->user()->downVote($model);
         $this->voted($model);
         return $this->voteResponse($model);
 
@@ -26,7 +26,7 @@ trait Vote
     public function cancelVote($key)
     {
         $model = $this->retrieveModel($key);
-        auth()->user()->upVote($model);
+        auth()->user()->cancelVote($model);
         $this->voted($model);
         return $this->voteResponse($model);
     }

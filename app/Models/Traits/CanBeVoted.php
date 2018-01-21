@@ -60,8 +60,6 @@ trait CanBeVoted
      */
     public function voters()
     {
-        $property = property_exists($this, 'vote') ? $this->vote : __CLASS__;
-
-        return $this->morphMany($property, 'votable', 'votes');
+        return $this->morphMany(\App\Models\Vote::class, 'votable');
     }
 }
