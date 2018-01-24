@@ -13,7 +13,7 @@
       <Cell title="一句话介绍">{{me.introduce}}</Cell>
     </div>
     <button class="logout_btn" @click="logout">退出登录</button>
-    <FullScreenDialog :show.sync="showNameDialog" class="name_input_dialog">
+    <FullScreenDialog @save="saveName" :show.sync="showNameDialog" class="name_input_dialog">
       <div class="input_wrapper">
         <MInput placeholder="请输入昵称" v-model="name"/>
       </div>
@@ -32,9 +32,16 @@ export default {
       return this.$store.state.me || {};
     }
   },
+  watch: {
+    me (newVal, oldVal) {
+      if (newVal.name !== oldVal.name) {
+        this.name = this.me.name;
+      }
+    }
+  },
   data () {
     return {
-      name: '123',
+      name: '',
       uploadSrc: null,
       showNameDialog: false
     };
@@ -59,9 +66,19 @@ export default {
       try {
         let res = await this.$http.post('ajax_upload_image', formData);
         await this.patchMe('avatar_hash', res.data.image_hash);
+        this.$store.state.me.avatar.cover_url = this.uploadSrc;
+        this.$store.commit('UPDATE_ME', this.$store.state.me);
       } catch (e) {
         this.uploadSrc = null;
       }
+    },
+    async saveName () {
+      try {
+        await this.patchMe('name', this.name);
+        this.showNameDialog = false;
+        this.$store.state.me.name = this.name;
+        this.$store.commit('UPDATE_ME', this.$store.state.me);
+      } catch (e) {}
     }
   }
 };

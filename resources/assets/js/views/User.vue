@@ -6,7 +6,7 @@
         <img :src="user.avatar && user.avatar.cover_url" :alt="user.name">
       </div>
       <h1>{{user.name}} <a class="github_link" :href="user.github_url"><i class="iconfont icon-github"></i></a></h1>
-      <p class="intro">口中疾呼烫烫烫</p>
+      <p class="intro">{{user.introduce}}</p>
       <button v-if="isMine" @click="$router.push({name: 'userSettings'})" class="edit_btn"><i class="iconfont icon-bianji"></i> 编辑资料</button>
       <footer>
         <ul>

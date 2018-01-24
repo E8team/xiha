@@ -4,7 +4,6 @@ import router from './router';
 import App from './App.vue';
 import 'normalize.css';
 import { getBaseUrl } from './utils/utils';
-import confirm from './components/confirm';
 import message from './components/message';
 import FastClick from 'fastclick';
 import Vuex from 'vuex';
@@ -13,7 +12,6 @@ import VueScroller from 'vue-scroller';
 import VueContentPlaceholders from 'vue-content-placeholders';
 
 Vue.prototype.$message = message;
-Vue.prototype.$confirm = confirm;
 
 // 获取baseUrl
 let baseUrl = getBaseUrl();
