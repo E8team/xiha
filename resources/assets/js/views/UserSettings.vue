@@ -57,7 +57,13 @@ export default {
     };
   },
   methods: {
-    logout () {
+    async logout () {
+      await this.$http.post('auth/logout');
+      localStorage.removeItem('jwt_token');
+      localStorage.removeItem('expiry_time');
+      this.$router.push({name: 'home'});
+      this.$message({type: 'info', msg: '已安全退出'});
+      this.$store.commit('UPDATE_ME', null);
     },
     async patchMe (filed, newValue) {
       let params = {};
@@ -83,20 +89,16 @@ export default {
       }
     },
     async saveName () {
-      try {
-        await this.patchMe('name', this.name);
-        this.showNameDialog = false;
-        this.$store.state.me.name = this.name;
-        this.$store.commit('UPDATE_ME', this.$store.state.me);
-      } catch (e) {}
+      await this.patchMe('name', this.name);
+      this.showNameDialog = false;
+      this.$store.state.me.name = this.name;
+      this.$store.commit('UPDATE_ME', this.$store.state.me);
     },
     async saveIntroduce () {
-      try {
-        await this.patchMe('introduce', this.introduce);
-        this.showIntroduceDialog = false;
-        this.$store.state.me.introduce = this.introduce;
-        this.$store.commit('UPDATE_ME', this.$store.state.me);
-      } catch (e) {}
+      await this.patchMe('introduce', this.introduce);
+      this.showIntroduceDialog = false;
+      this.$store.state.me.introduce = this.introduce;
+      this.$store.commit('UPDATE_ME', this.$store.state.me);
     }
   }
 };

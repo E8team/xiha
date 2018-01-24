@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     close () {
-      console.log('update:show');
       this.$emit('update:show', false);
     }
   }
