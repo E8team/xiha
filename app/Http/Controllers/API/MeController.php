@@ -20,7 +20,7 @@ class MeController extends APIController
         return new UserResource(auth()->user()->load('avatar'));
     }
 
-    public function upload(MeRequest $request)
+    public function update(MeRequest $request)
     {
         $data = $request->validated();
         $data['name'] = e($data['name']);
