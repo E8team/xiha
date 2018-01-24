@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
 use Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends APIController
 {
@@ -14,7 +15,19 @@ class AuthController extends APIController
      */
     public function __construct()
     {
-        // todo $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
