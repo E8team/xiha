@@ -24,12 +24,12 @@ class AppServiceProvider extends ServiceProvider
 
         if ($this->app->environment() !== 'production') {
             DB::listen(function ($query) {
-                $sql = str_replace('?', '%s', $query->sql);
-                foreach ($query->bindings as $binding) {
+                $sql = str_replace('?', "'%s'", $query->sql);
+                foreach ($query->bindings as &$binding) {
                     $binding = (string)$binding;
                 }
                 $sql = sprintf($sql, ...$query->bindings);
-                Log::info('sql', [$sql, $query->time, url()->current()]);
+                Log::info('sql', ["$sql\n", $query->time, url()->current()]);
             });
         }
     }
