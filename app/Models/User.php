@@ -27,7 +27,7 @@ class User extends BaseModel implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'avatar_hash', 'github_url', 'last_active_at'
+        'name', 'email', 'username', 'avatar_hash', 'github_url', 'last_active_at', 'introduce'
     ];
 
     protected $dates = ['last_active_at'];
