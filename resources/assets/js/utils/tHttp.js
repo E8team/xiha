@@ -37,7 +37,7 @@ tHttp.install = (Vue, {baseURL, router}) => {
       return config;
     }
     (async () => {
-      if (new Date().getTime > Number(expiryTime)) {
+      if (new Date().getTime() > Number(expiryTime)) {
         // jwt_token已经过期
         let res = await Vue.prototype.$http.post('auth/refresh');
         Vue.prototype.$http.defaults.headers.Authorization = 'Bearer ' + res.data;

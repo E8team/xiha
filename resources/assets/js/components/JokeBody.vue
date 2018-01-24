@@ -6,17 +6,17 @@
         <div class="user_name">{{joke.user && joke.user.name}}</div>
       </template>
     </header>
-    <section class="content">
+    <section @click="$router.push({name: 'joke', params: {id: joke.id}})"  class="content">
       {{joke.content}}
     </section>
     <footer>
-      <button class="btn vote" type="button">
+      <button :class="{'active': joke.me_vote && joke.me_vote.type === 'up_vote'}" @click="upVote" class="btn vote" type="button">
         <svg viewBox="0 0 20 18" class="icon" width="9" height="16">
           <g><path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"></path></g>
         </svg>
-        79
+        {{joke.votes_count}}
       </button>
-      <button class="btn vote tread" type="button">
+      <button :class="{'active': joke.me_vote && joke.me_vote.type === 'down_vote'}" @click="downVote" class="btn vote tread" type="button">
         <svg viewBox="0 0 20 18" class="icon" width="9" height="16">
           <g><path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"></path></g>
         </svg>
@@ -36,6 +36,30 @@ export default {
   name: 'JokeBody',
   props: {
     joke: Object
+  },
+  methods: {
+    async upVote () {
+      let res;
+      if (!this.joke.me_vote || this.joke.me_vote.type !== 'up_vote') {
+        res = await this.$http.put(`jokes/${this.joke.id}/up_vote`);
+        this.joke.me_vote = { type: 'up_vote' };
+      } else {
+        res = await this.$http.put(`jokes/${this.joke.id}/cancel_vote`);
+        this.joke.me_vote = null;
+      }
+      this.joke.votes_count = res.data.up_count;
+    },
+    async downVote () {
+      let res;
+      if (!this.joke.me_vote || this.joke.me_vote.type !== 'down_vote') {
+        res = await this.$http.put(`jokes/${this.joke.id}/down_vote`);
+        this.joke.me_vote = { type: 'down_vote' };
+      } else {
+        res = await this.$http.put(`jokes/${this.joke.id}/cancel_vote`);
+        this.joke.me_vote = null;
+      }
+      this.joke.votes_count = res.data.up_count;
+    }
   }
 };
 </script>
@@ -89,6 +113,10 @@ export default {
     color: #8590a6;
   }
   footer{
+    .btn.active{
+      color: #fff!important;
+      background: #0084ff!important;
+    }
     .btn.vote{
       border-radius: 3px;
       padding: 0 10px;
