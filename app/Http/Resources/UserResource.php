@@ -18,6 +18,7 @@ class UserResource extends Resource
             // 'id' => $this->id,
             'name' => $this->name,
             'username' => $this->username,
+            'introduce' => $this->introduce,
             // 'email' => $this->email,
             /*$this->mergeWhen($this->resource->relationLoaded('avatar'), [
                 'avatar_url' => $this->avatar->url
