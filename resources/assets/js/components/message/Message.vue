@@ -46,6 +46,7 @@ export default {
     background-color: #333;
     text-align: center;
     transition: opacity .3s,transform .4s;
+    opacity: .8;
   }
   .message.error{
     color: #a94442;
