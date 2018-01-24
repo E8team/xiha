@@ -12,7 +12,7 @@ export default {
     return {
       focus: false,
       text: ''
-    }
+    };
   }
 };
 </script>

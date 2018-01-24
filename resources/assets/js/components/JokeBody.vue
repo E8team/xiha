@@ -13,13 +13,13 @@
       </div>
     </section>
     <footer>
-      <button :class="{'active': joke.me_vote && joke.me_vote.type === 'up_vote'}" @click="upVote" class="btn vote" type="button">
+      <button :class="{'active': joke.me_vote && joke.me_vote.type === 'up_vote'}" @click.stop="upVote" class="btn vote" type="button">
         <svg viewBox="0 0 20 18" class="icon" width="9" height="16">
           <g><path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"></path></g>
         </svg>
         {{joke.votes_count}}
       </button>
-      <button :class="{'active': joke.me_vote && joke.me_vote.type === 'down_vote'}" @click="downVote" class="btn vote tread" type="button">
+      <button :class="{'active': joke.me_vote && joke.me_vote.type === 'down_vote'}" @click.stop="downVote" class="btn vote tread" type="button">
         <svg viewBox="0 0 20 18" class="icon" width="9" height="16">
           <g><path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"></path></g>
         </svg>
@@ -32,7 +32,7 @@
         <div>评论 {{joke.comments_count}}</div>
       </button>
     </footer>
-    <PhotoSwipe ref="photoSwipe" :items="items"></PhotoSwipe>
+    <PhotoSwipe v-dom-portal ref="photoSwipe" :items="items"></PhotoSwipe>
   </div>
 </template>
 <script>

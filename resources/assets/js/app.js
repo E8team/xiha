@@ -10,6 +10,7 @@ import Vuex from 'vuex';
 import store from './vuex/store';
 import VueScroller from 'vue-scroller';
 import VueContentPlaceholders from 'vue-content-placeholders';
+import DomPortal from 'vue-dom-portal';
 
 Vue.prototype.$message = message;
 
@@ -17,6 +18,7 @@ Vue.prototype.$message = message;
 let baseUrl = getBaseUrl();
 
 Vue.use(VueContentPlaceholders);
+Vue.use(DomPortal);
 Vue.use(VueScroller);
 Vue.use(tHttp, {
   baseURL: baseUrl + 'api/',

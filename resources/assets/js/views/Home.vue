@@ -2,13 +2,12 @@
   <div>
     <TNav></TNav>
     <scroller
-      v-if="jokes.length > 0"
       class="scroller"
       :on-refresh="refresh"
       :on-infinite="infinite">
       <JokeBody :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
     </scroller>
-    <JokeBodyPlaceholders v-else :length="3"/>
+    <JokeBodyPlaceholders class="joke_body_placeholders" v-if="jokes.length=='0'" :length="3"/>
   </div>
 </template>
 
@@ -54,5 +53,4 @@ export default {
 .scroller{
   margin-top: 50px;
 }
-
 </style>
