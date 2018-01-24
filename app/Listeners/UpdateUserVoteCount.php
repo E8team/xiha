@@ -28,7 +28,7 @@ class UpdateUserVoteCount
         if ($upVoteChange > 0) {
             $event->getUser()->increment('up_votes_count', $upVoteChange);
         } elseif ($upVoteChange < 0) {
-            $event->getUser()->decrement('up_votes_count', abs($upVoteChange));
+            $event->getUser()->where('up_votes_count', '>', 0)->decrement('up_votes_count', abs($upVoteChange));
         }
     }
 }

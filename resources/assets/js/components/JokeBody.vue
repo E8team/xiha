@@ -58,10 +58,10 @@ export default {
     async upVote () {
       let res;
       if (!this.joke.me_vote || this.joke.me_vote.type !== 'up_vote') {
-        res = await this.$http.put(`jokes/${this.joke.id}/up_vote`);
+        res = await this.$http.patch(`jokes/${this.joke.id}/up_vote`);
         this.joke.me_vote = { type: 'up_vote' };
       } else {
-        res = await this.$http.put(`jokes/${this.joke.id}/cancel_vote`);
+        res = await this.$http.patch(`jokes/${this.joke.id}/cancel_vote`);
         this.joke.me_vote = null;
       }
       this.joke.up_votes_count = res.data.up_votes_count;
@@ -69,10 +69,10 @@ export default {
     async downVote () {
       let res;
       if (!this.joke.me_vote || this.joke.me_vote.type !== 'down_vote') {
-        res = await this.$http.put(`jokes/${this.joke.id}/down_vote`);
+        res = await this.$http.patch(`jokes/${this.joke.id}/down_vote`);
         this.joke.me_vote = { type: 'down_vote' };
       } else {
-        res = await this.$http.put(`jokes/${this.joke.id}/cancel_vote`);
+        res = await this.$http.patch(`jokes/${this.joke.id}/cancel_vote`);
         this.joke.me_vote = null;
       }
       this.joke.up_votes_count = res.data.up_votes_count;
