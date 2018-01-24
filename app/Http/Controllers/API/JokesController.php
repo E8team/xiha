@@ -14,7 +14,7 @@ class JokesController extends APIController implements VoteController
 {
     use VoteControllerHelper;
 
-    //protected $resourceClass = Joke::class;
+    protected $resourceClass = Joke::class;
 
     public function __construct()
     {
