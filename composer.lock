@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "13d45278c9375b4f8447665cab77f84b",
+    "content-hash": "d00f88e901b577cff5c4666c3ea9fc0c",
     "packages": [
         {
             "name": "caouecs/laravel-lang",
@@ -3587,6 +3587,65 @@
             ],
             "description": "cdn pusher for laravel",
             "time": "2017-12-02T15:26:14+00:00"
+        },
+        {
+            "name": "ty666/laravel-vote",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/3tnet/laravel-vote.git",
+                "reference": "39547a4fae6728e27402d052b10de69f7061dccb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/3tnet/laravel-vote/zipball/39547a4fae6728e27402d052b10de69f7061dccb",
+                "reference": "39547a4fae6728e27402d052b10de69f7061dccb",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "laravel/laravel": "5.*",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ty666\\LaravelVote\\LaravelVoteServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ty666\\LaravelVote\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ty666",
+                    "email": "1255803549@qq.com"
+                }
+            ],
+            "description": "vote",
+            "homepage": "https://github.com/3tnet/laravel-vote",
+            "keywords": [
+                "laravel",
+                "vote"
+            ],
+            "time": "2018-01-24T18:35:13+00:00"
         },
         {
             "name": "tymon/jwt-auth",

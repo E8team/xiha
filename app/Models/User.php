@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Ty666\LaravelVote\Traits\CanVote;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use App\Models\Traits\Vote;
 
 class User extends BaseModel implements
     AuthenticatableContract,
@@ -19,7 +19,7 @@ class User extends BaseModel implements
     JWTSubject
 {
     use Notifiable;
-    use Authenticatable, Authorizable, CanResetPassword, Vote;
+    use Authenticatable, Authorizable, CanResetPassword, CanVote;
 
     /**
      * The attributes that are mass assignable.

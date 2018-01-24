@@ -2,10 +2,9 @@
 
 namespace App\Listeners;
 
+use Ty666\LaravelVote\Events\Voted;
 
-use App\Events\Voted;
-
-class UpdateVoteCount
+class UpdateUserVoteCount
 {
     /**
      * Create the event listener.
@@ -25,13 +24,11 @@ class UpdateVoteCount
      */
     public function handle(Voted $event)
     {
-        $upVoteChange = $event->change['up_vote'];
+        $upVoteChange = $event->getChange()['up_vote'];
         if ($upVoteChange > 0) {
-            $event->votable->increment('votes_count', $upVoteChange);
-            $event->votable->user->increment('votes_count', $upVoteChange);
+            $event->getUser()->increment('votes_count', $upVoteChange);
         } elseif ($upVoteChange < 0) {
-            $event->votable->decrement('votes_count', abs($upVoteChange));
-            $event->votable->user->decrement('votes_count', abs($upVoteChange));
+            $event->getUser()->decrement('votes_count', abs($upVoteChange));
         }
     }
 }
