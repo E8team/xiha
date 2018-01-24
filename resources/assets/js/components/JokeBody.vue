@@ -1,14 +1,16 @@
 <template>
   <div class="joke">
     <header>
-      <template @click="$router.push({name: 'user', params: {id: joke.user.username}})">
+      <div @click="$router.push({name: 'user', params: {id: joke.user.username}})">
         <img class="user_img" :src="joke.user && joke.user.avatar.cover_url">
         <div class="user_name">{{joke.user && joke.user.name}}</div>
-      </template>
+      </div>
     </header>
     <section @click="$router.push({name: 'joke', params: {id: joke.id}})"  class="content">
-      {{joke.content}}
-      <img v-if="joke.image" :src="joke.image.cover_url" alt="">
+      <div>{{joke.content}}</div>
+      <div @click.stop="$refs['photoSwipe'].show()" v-if="joke.image" :class="{'gif': joke.image.is_gif, 'high': joke.image.is_high}" class="img">
+        <img :src="joke.image.cover_url" alt="">
+      </div>
     </section>
     <footer>
       <button :class="{'active': joke.me_vote && joke.me_vote.type === 'up_vote'}" @click="upVote" class="btn vote" type="button">
@@ -30,13 +32,27 @@
         <div>评论 {{joke.comments_count}}</div>
       </button>
     </footer>
+    <PhotoSwipe ref="photoSwipe" :items="items"></PhotoSwipe>
   </div>
 </template>
 <script>
+import PhotoSwipe from './PhotoSwipe.vue';
 export default {
   name: 'JokeBody',
+  components: { PhotoSwipe },
   props: {
     joke: Object
+  },
+  computed: {
+    items () {
+      if (this.joke.image) {
+        return [{
+          src: this.joke.image.url,
+          w: this.joke.image.width,
+          h: this.joke.image.height
+        }];
+      }
+    }
   },
   methods: {
     async upVote () {
@@ -92,6 +108,7 @@ export default {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: inline-block;
     }
   }
   .content{
@@ -102,9 +119,29 @@ export default {
     color: #4e4e4e;
     line-height: 1.8;
     word-break: break-all;
-    img{
+    .img{
       margin-top: 10px;
-      width: 100%;
+      position: relative;
+      display: inline-block;
+      >img{
+        max-width: 100%;
+        vertical-align: middle;
+      }
+      &.gif::after, &.high::after{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0px 3px;
+        font-size: 9px;
+        color: #fff;
+        background-color: rgba(80,125,175,.75);
+      }
+      &.gif::after{
+        content: '动图';
+      }
+      &.high::after{
+        content: '长图';
+      }
     }
   }
   .btn {
@@ -161,3 +198,4 @@ export default {
   }
 }
 </style>
+
