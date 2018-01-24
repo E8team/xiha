@@ -32,6 +32,7 @@ export default {
     padding: 0 10px;
     border-bottom: 1px solid rgba(30,35,42,.06);
     position: relative;
+    z-index: 1001;
     >.publish_btn{
       float: right;
       >i{ 
