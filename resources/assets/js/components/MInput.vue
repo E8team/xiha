@@ -25,6 +25,9 @@ export default {
       if (this.focus) {
         return true;
       }
+      if (!this.text) {
+        return false;
+      }
       return this.text.length > 0;
     }
   },

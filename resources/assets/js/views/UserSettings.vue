@@ -10,12 +10,17 @@
       </Cell>
       <Cell @click.native="showNameDialog = true" title="昵称">{{me.name}}</Cell>
       <Cell title="用户名">{{me.username}}</Cell>
-      <Cell title="一句话介绍">{{me.introduce}}</Cell>
+      <Cell @click.native="showIntroduceDialog = true" title="一句话介绍">{{me.introduce}}</Cell>
     </div>
     <button class="logout_btn" @click="logout">退出登录</button>
     <FullScreenDialog @save="saveName" :show.sync="showNameDialog" class="name_input_dialog">
       <div class="input_wrapper">
         <MInput placeholder="请输入昵称" v-model="name"/>
+      </div>
+    </FullScreenDialog>
+    <FullScreenDialog @save="saveIntroduce" :show.sync="showIntroduceDialog" class="name_input_dialog">
+      <div class="input_wrapper">
+        <MInput placeholder="一句话描述自己" v-model="introduce"/>
       </div>
     </FullScreenDialog>
   </div>
@@ -37,13 +42,18 @@ export default {
       if (newVal.name !== oldVal.name) {
         this.name = this.me.name;
       }
+      if (newVal.introduce !== oldVal.introduce) {
+        this.introduce = this.me.introduce;
+      }
     }
   },
   data () {
     return {
       name: '',
+      introduce: '',
       uploadSrc: null,
-      showNameDialog: false
+      showNameDialog: false,
+      showIntroduceDialog: false
     };
   },
   methods: {
@@ -77,6 +87,14 @@ export default {
         await this.patchMe('name', this.name);
         this.showNameDialog = false;
         this.$store.state.me.name = this.name;
+        this.$store.commit('UPDATE_ME', this.$store.state.me);
+      } catch (e) {}
+    },
+    async saveIntroduce () {
+      try {
+        await this.patchMe('introduce', this.introduce);
+        this.showIntroduceDialog = false;
+        this.$store.state.me.introduce = this.introduce;
         this.$store.commit('UPDATE_ME', this.$store.state.me);
       } catch (e) {}
     }
