@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 const state = {
   me: null,
-  lastPublishJoke: null
+  lastPublishJoke: null,
+  lastHomePos: null
 };
 export default new Vuex.Store({
   state,
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     UPDATE_LAST_PUBLISH_JOKE (state, joke) {
       state.lastPublishJoke = joke;
+    },
+    UPDATE_LAST_HOME_POS (state, pos) {
+      state.lastHomePos = pos;
     }
   },
   actions: {

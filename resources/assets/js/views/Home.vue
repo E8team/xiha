@@ -2,13 +2,13 @@
   <div>
     <TNav></TNav>
     <scroller
-      v-if="jokes.length > 0"
       class="scroller"
+      ref="scroller"
       :on-refresh="refresh"
       :on-infinite="infinite">
       <JokeBody :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
     </scroller>
-    <JokeBodyPlaceholders v-else :length="3"/>
+    <JokeBodyPlaceholders class="joke_body_placeholders" v-if="jokes.length=='0'" :length="3"/>
   </div>
 </template>
 
@@ -23,6 +23,10 @@ export default {
       jokes: [],
       links: {}
     };
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$store.commit('UPDATE_LAST_HOME_POS', this.$refs['scroller'].getPosition());
+    next();
   },
   methods: {
     refresh (done) {
@@ -47,12 +51,26 @@ export default {
   },
   mounted () {
     this.getJokes();
+  },
+  activated () {
+    if (this.$store.state.lastHomePos) {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.$refs['scroller'].scrollTo(this.$store.state.lastHomePos.left, this.$store.state.lastHomePos.top, false);
+        }, 0);
+      });
+    }
+  },
+  destroyed () {
+    let pswps = document.querySelectorAll('.pswp');
+    pswps.forEach(element => {
+      document.body.removeChild(element);
+    });
   }
 };
 </script>
 <style scoped lang="less">
 .scroller{
-  margin-top: 50px;
+  padding-top: 50px;
 }
-
 </style>

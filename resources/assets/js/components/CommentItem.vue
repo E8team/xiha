@@ -4,20 +4,15 @@
       <img src="https://apic.douyucdn.cn/upload/avatar/face/201609/08/f6c0c08a3f3cb1fd074fe38907ae2508_middle.jpg?rltime">
     </div>
     <div class="user_name">初音ミク骑士团の奈</div>
-    <span class="comment_time">12小时前</span>
+    <div class="zan">
+      <i class="iconfont icon-xin"></i>
+      <div class="zan_num">10</div>
+    </div>
     <p class="comment_text">
       周四大事件，周五分开播
     </p>
     <footer>
-      <div class="item active">
-        <i class="iconfont icon-pinglun"></i> <span class="num">12</span>
-      </div>
-      <div class="item">
-        <i class="iconfont icon-zan"></i> <span class="num">12</span>
-      </div>
-      <div class="item">
-        <i class="iconfont icon-zan reversal"></i> <span class="num">12</span>
-      </div>
+      <span class="comment_time">12小时前</span>
     </footer>
   </div>
 </template>
@@ -48,12 +43,25 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .comment_time{
+  .zan{
     position: absolute;
-    right: 0;
+    right: 10px;
+    top: 7px;
+    color: #999;
+    &.active{
+      color: #ed4630;
+    }
+    >i{
+      font-size: 24px;
+    }
+    >.zan_num{
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .comment_time{
     font-size: 12px;
     color: #999;
-    top: 10px;
   }
   .comment_text{
     color: #212121;
@@ -63,23 +71,8 @@
     margin-top: 10px;
   }
   footer{
-    padding-top: 10px;
+    padding-top: 5px;
     overflow: hidden;
-    .item{
-      font-size: 12px;
-      color: #aaa;
-      float: left;
-      margin-right: 10px;
-      &.active{
-        color: #0f88eb;
-      }
-      i.reversal{
-        position: relative;
-        top: 2px;
-        display: inline-block;
-        transform: rotate(180deg)
-      }
-    }
   }
 }
 </style>
