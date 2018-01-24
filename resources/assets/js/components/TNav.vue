@@ -31,7 +31,6 @@ export default {
     background-color: #fff;
     padding: 0 10px;
     border-bottom: 1px solid rgba(30,35,42,.06);
-    box-shadow: 0 1px 1px 0 rgba(0, 34, 77, 0.05);
     position: relative;
     >.publish_btn{
       float: right;

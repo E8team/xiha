@@ -25,6 +25,9 @@ export default {
   overflow: hidden;
   position: relative;
   min-height: 49.4px;
+  &:active{
+    background-color: #fafafa;
+  }
   .title, .content{
     font-size: 16px;
   }
