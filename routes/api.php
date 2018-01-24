@@ -22,7 +22,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('ajax_upload_image', 'ImageController@upload');
 
     Route::get('me', 'MeController@show');
-
+    Route::match(['put', 'patch'], 'me', 'MeController@update');
     Route::apiResource('jokes', 'JokesController');
     Route::put('jokes/{joke}/up_vote', 'JokesController@upVote');
     Route::put('jokes/{joke}/down_vote', 'JokesController@downVote');
