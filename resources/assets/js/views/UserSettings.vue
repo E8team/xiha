@@ -56,6 +56,10 @@ export default {
       showIntroduceDialog: false
     };
   },
+  mounted () {
+    this.name = this.me.name;
+    this.introduce = this.me.introduce;
+  },
   methods: {
     async logout () {
       await this.$http.post('auth/logout');
@@ -140,4 +144,3 @@ export default {
   }
 }
 </style>
-
