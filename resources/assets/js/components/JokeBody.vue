@@ -8,6 +8,7 @@
     </header>
     <section @click="$router.push({name: 'joke', params: {id: joke.id}})"  class="content">
       {{joke.content}}
+      <img v-if="joke.image" :src="joke.image.cover_url" alt="">
     </section>
     <footer>
       <button :class="{'active': joke.me_vote && joke.me_vote.type === 'up_vote'}" @click="upVote" class="btn vote" type="button">
@@ -101,6 +102,10 @@ export default {
     color: #4e4e4e;
     line-height: 1.8;
     word-break: break-all;
+    img{
+      margin-top: 10px;
+      width: 100%;
+    }
   }
   .btn {
     outline: none;

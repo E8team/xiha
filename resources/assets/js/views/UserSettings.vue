@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import Cell from '../components/Cell'
+import Cell from '../components/Cell';
 import TNav from '../components/TNav';
 export default {
   components: { TNav, Cell },
