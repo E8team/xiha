@@ -20,9 +20,10 @@ class JokeResource extends Resource
             'user' => new UserResource($this->whenLoaded('user')),
             'image' => new ImageResource($this->whenLoaded('image')),
             'comments_count' => $this->comments_count,
-            'votes_count' => $this->votes_count,
+            'up_votes_count' => $this->up_votes_count,
             $this->mergeWhen(auth()->check(), function () {
-                return ['me_vote' => new VoteResource(auth()->user()->getVoteByVotable($this->resource))];
+                // todo 如何优化?
+                return ['me_vote' => new VoteResource($this->getVoteInfoByUser(auth()->user()))];
             }),
             'content' => $this->content,
             'updated_at' => toIso8601String($this->updated_at),

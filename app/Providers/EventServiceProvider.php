@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\Voted;
-use App\Listeners\UpdateVoteCount;
+use Ty666\LaravelVote\Events\Voted;
+use App\Listeners\UpdateUserVoteCount;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Voted::class => [
-            UpdateVoteCount::class
+            UpdateUserVoteCount::class
         ],
     ];
 

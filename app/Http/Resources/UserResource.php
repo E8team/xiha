@@ -26,7 +26,7 @@ class UserResource extends Resource
             'avatar' => new ImageResource($this->whenLoaded('avatar')),
             'github_url' => $this->github_url,
             'jokes_count' => $this->jokes_count,
-            'votes_count' => $this->votes_count,
+            'up_votes_count' => $this->votes_count,
             'views_count' => $this->views_count,
             'last_active_at' => toIso8601String($this->last_active_at),
             'updated_at' => toIso8601String($this->updated_at),

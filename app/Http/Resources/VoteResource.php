@@ -16,7 +16,6 @@ class VoteResource extends Resource
     {
         return [
             'type' => $this->type,
-            'updated_at' => toIso8601String($this->updated_at),
             'created_at' => toIso8601String($this->created_at),
         ];
     }

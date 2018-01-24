@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->char('avatar_hash', 32)->nullable()->comment('头像');
             $table->string('github_url')->nullable();
             $table->unsignedInteger('jokes_count')->default(0)->index()->commnet('发的笑话数量');
-            $table->unsignedInteger('votes_count')->default(0)->index();
+            $table->unsignedInteger('up_votes_count')->default(0)->index()->comment('通过 joke 和评论得到的所有赞');
             $table->unsignedInteger('views_count')->default(0)->index();
             $table->timestampTz('last_active_at')->nullable();
             // $table->rememberToken();

@@ -3,11 +3,15 @@
 namespace App\Models;
 
 
-use App\Models\Traits\CanBeVoted;
+use Ty666\LaravelVote\Contracts\CanCountUpVotesModel;
+use Ty666\LaravelVote\Traits\CanBeVoted;
+use Ty666\LaravelVote\Traits\CanCountUpVotes;
 
-class Joke extends BaseModel
+class Joke extends BaseModel implements CanCountUpVotesModel
 {
-    use CanBeVoted;
+    use CanBeVoted, CanCountUpVotes;
+
+    protected $upVotesCountField = 'up_votes_count';
 
     protected $fillable = ['user_id', 'image_hash', 'content'];
 
@@ -27,5 +31,4 @@ class Joke extends BaseModel
             $user = $user->id;
         $query->where('user_id', $user);
     }
-
 }
