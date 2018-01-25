@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->morphs('commentable');
             $table->unsignedInteger('user_id')->index();
-            $table->unsignedInteger('up_votes_count');
+            $table->unsignedInteger('up_votes_count')->default(0);
             $table->text('content', 2000);
             $table->timestampsTz();
             $table->foreign('user_id')
