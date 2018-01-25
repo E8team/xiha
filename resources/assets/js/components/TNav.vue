@@ -6,7 +6,7 @@
       <div @click="$router.push({name: 'user', params: {id: me.username}})" class="cover_wrapper">
         <img :src="me.avatar.avatar_sm" :alt="me.name">
       </div>
-      <div @click="$router.push({name: 'notification'})" class="icon_btn has_notify">
+      <div @click="$router.push({name: 'notification'})" class="icon_btn" :class="{'has_notify': hasNotify}">
         <i class="iconfont icon-tongzhi"></i>
       </div>
       <div @click="$router.push({name: 'publish'})" class="icon_btn">
@@ -24,6 +24,23 @@ export default {
       return this.$store.state.me;
     },
   },
+  methods: {
+    async getUnreadCount () {
+      let res = await this.$http.get('me/notifications/unread_count');
+      this.hasNotify = res.data.unread > 0;
+    }
+  },
+  mounted () {
+    this.getUnreadCount();
+    setInterval(() => {
+      this.getUnreadCount();
+    }, 5000);
+  },
+  data () {
+    return {
+      hasNotify: false
+    };
+  }
 };
 </script>
 

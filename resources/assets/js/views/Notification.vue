@@ -8,7 +8,7 @@
       :on-infinite="infinite">
       <div class="notification_list">
         <header>
-          <button @click="read">全部标记为已读</button>
+          <button @click="read()">全部标记为已读</button>
         </header>
         <ul>
           <li @click="read(notification.id, index)" :class="{'readed': notification.read_at}" class="item" v-for="(notification, index) in list" :key="notification.id">

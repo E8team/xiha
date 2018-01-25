@@ -11,7 +11,13 @@
 export default {
   name: 'LoadMoreWrapper',
   props: {
-    url: String
+    url: String,
+    addComment: Object
+  },
+  watch: {
+    addComment () {
+      this.list.unshift(this.addComment);
+    }
   },
   data () {
     return {
