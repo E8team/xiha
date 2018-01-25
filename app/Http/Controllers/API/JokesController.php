@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\Commented;
 use App\Http\Controllers\APIController;
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\JokeRequest;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\JokeCollection;
 use App\Http\Resources\JokeResource;
 use App\Models\Joke;
@@ -18,7 +21,7 @@ class JokesController extends APIController implements VoteController
 
     public function __construct()
     {
-        $this->middleware('auth')->only('store', 'upVote', 'downVote', 'cancelVote');
+        $this->middleware('auth')->except('index', 'show');
     }
 
     public function index()
@@ -38,5 +41,14 @@ class JokesController extends APIController implements VoteController
         $data['content'] = isset($data['content']) ? e($data['content']) : '';
         $data['user_id'] = auth()->id();
         return new JokeResource(Joke::create($data)->load('image'));
+    }
+
+    public function storeComment(Joke $joke, CommentRequest $request)
+    {
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $comment = $joke->comments()->create($data);
+        event(new Commented($comment, $joke, auth()->user()));
+        return new CommentResource($comment);
     }
 }

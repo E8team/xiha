@@ -25,6 +25,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::match(['put', 'patch'], 'me', 'MeController@update');
     Route::apiResource('jokes', 'JokesController');
     Route::vote('jokes', 'JokesController');
+    Route::vote('comments', 'CommentsController', ['except' => 'down_vote']);
     Route::get('users/{user}', 'UsersController@show');
     Route::get('users/{user}/jokes', 'UsersController@jokes');
 

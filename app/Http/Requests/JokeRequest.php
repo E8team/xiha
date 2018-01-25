@@ -29,7 +29,7 @@ class JokeRequest extends FormRequest
                 return [];
             case 'POST':
                 return [
-                    'content' => 'required_without_all:image_hash|nullable|max:2000',
+                    'content' => 'required_without_all:image_hash|nullable|min:1|max:2000',
                     'image_hash' => 'bail|required_without_all:content|nullable|size:32|exists:images,hash'
                 ];
             case 'PUT':

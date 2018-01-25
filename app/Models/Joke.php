@@ -31,4 +31,9 @@ class Joke extends BaseModel implements CanCountUpVotesModel
             $user = $user->id;
         $query->where('user_id', $user);
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }
