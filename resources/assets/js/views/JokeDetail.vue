@@ -54,13 +54,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.joke_detail{
+  padding-bottom: 45px;
+}
 .comment{
   margin-top: 10px;
   background: #fff;
   padding: 10px;
   padding-bottom: 0;
   overflow: hidden;
-  padding-bottom: 45px;
   header{
     line-height: 30px;
     h3{
