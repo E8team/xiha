@@ -6,7 +6,10 @@
       <div @click="$router.push({name: 'user', params: {id: me.username}})" class="cover_wrapper">
         <img :src="me.avatar.avatar_sm" :alt="me.name">
       </div>
-      <div @click="$router.push({name: 'publish'})" class="publish_btn">
+      <div @click="$router.push({name: 'notification'})" class="icon_btn has_notify">
+        <i class="iconfont icon-tongzhi"></i>
+      </div>
+      <div @click="$router.push({name: 'publish'})" class="icon_btn">
         <i class="iconfont icon-tianjia"></i>
       </div>
     </template>
@@ -33,12 +36,24 @@ export default {
     border-bottom: 1px solid rgba(30,35,42,.06);
     position: relative;
     z-index: 11;
-    >.publish_btn{
+    >.icon_btn{
       float: right;
+      position: relative;
       >i{ 
         font-size: 24px;
         color: #666;
         margin-right: 15px;
+      }
+      &.has_notify::after{
+        content: '';
+        position: absolute;
+        top: 13px;
+        right: 16px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: red;
+        border: 1.5px solid #fff;
       }
     }
     >.cover_wrapper{

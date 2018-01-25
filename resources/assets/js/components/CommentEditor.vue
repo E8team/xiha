@@ -25,7 +25,7 @@ export default {
   left: 0;
   display: flex;
   width: 100%;
-  height: 35px;
+  height: 45px;
   box-shadow: 0 -1px 1px 0 rgba(0, 34, 77, 0.05);
   >.mask{
     position: fixed;
@@ -48,7 +48,7 @@ export default {
     outline: 0;
     border: 0;
     padding: 0 10px;
-    font-size: 12px;
+    font-size: 14px;
     z-index: 13;
     position: relative;
   }

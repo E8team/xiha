@@ -80,10 +80,4 @@ export default {
 .scroller{
   padding-top: 50px;
 }
-.no_data{
-  line-height: 60px;
-  font-size: 18px;
-  text-align: center;
-  color: #666;
-}
 </style>
