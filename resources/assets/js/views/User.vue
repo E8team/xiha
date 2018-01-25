@@ -11,8 +11,6 @@
       <footer>
         <ul>
           <li class="active">投稿 <span class="tip">({{user.jokes_count}})</span></li>
-          <li>回复</li>
-          <li>赞</li>
         </ul>
       </footer>
     </div>
