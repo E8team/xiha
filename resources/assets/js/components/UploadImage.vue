@@ -1,6 +1,9 @@
 <template>
   <div class="upload_image">
     <div v-if="src" class="preview">
+      <transition name="fade">
+        <div v-if="!uploaded" class="mask">上传中</div>
+      </transition>
       <div @click="close" class="close_btn"></div>
       <img :src="src">
     </div>
@@ -15,7 +18,8 @@ export default {
   name: 'UploadImage',
   data () {
     return {
-      src: null
+      src: null,
+      uploaded: false
     };
   },
   methods: {
@@ -32,6 +36,7 @@ export default {
       try {
         let res = await this.$http.post('ajax_upload_image', formData);
         this.$emit('change', res.data.image_hash);
+        this.uploaded = true;
       } catch (e) {
         this.src = null;
       }
@@ -41,12 +46,29 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
 .upload_image {
   .preview{
     width: 90px;
     height: 90px;
     overflow: hidden;
     position: relative;
+    .mask{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      line-height: 90px;
+      text-align: center;
+      color: #eee;
+    }
     .close_btn{
       position: absolute;
       right: 0;
