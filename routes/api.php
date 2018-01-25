@@ -22,6 +22,10 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('ajax_upload_image', 'ImageController@upload');
 
     Route::get('me', 'MeController@show');
+
+    Route::get('me/notifications', 'MeController@getNotifications');
+    Route::patch('me/notifications/read/{id?}', 'MeController@markAsRead');
+
     Route::match(['put', 'patch'], 'me', 'MeController@update');
     Route::apiResource('jokes', 'JokesController');
     Route::vote('jokes', 'JokesController');
@@ -32,3 +36,4 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::get('users/{user}/jokes', 'UsersController@jokes');
 
 });
+
