@@ -18,12 +18,13 @@ class UpdateUserVoteCount
 
     /**
      * Handle the event.
-     *
+     * 这个监听器监听了投票事件 Ty666\LaravelVote\Events\Voted
      * @param  $event
      * @return void
      */
     public function handle(Voted $event)
     {
+        // 赞(up_vote)的变化值，例如：赞同(up_vote)的话此值为正1，反对的话（down_vote）的话此值为负1，等等。
         $upVoteChange = $event->getChange()['up_vote'];
         if ($upVoteChange > 0) {
             $event->getTargetModel()->user()->increment('up_votes_count', $upVoteChange);

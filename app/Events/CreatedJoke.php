@@ -13,6 +13,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+// 发布笑话事件
 class CreatedJoke
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;

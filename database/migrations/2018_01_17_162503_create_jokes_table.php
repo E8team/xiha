@@ -13,12 +13,13 @@ class CreateJokesTable extends Migration
      */
     public function up()
     {
+        // 笑话表
         Schema::create('jokes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
-            $table->char('image_hash', 32)->nullable();
+            $table->char('image_hash', 32)->nullable()->comment('对应 images 表 hash 字段');
             $table->unsignedInteger('comments_count')->default(0)->index()->comment('评论数');
-            $table->unsignedInteger('up_votes_count')->default(0)->index();
+            $table->unsignedInteger('up_votes_count')->default(0)->index()->comment('赞数量');
             $table->text('content')->commnet('内容');
             $table->timestampsTz();
             $table->foreign('user_id')

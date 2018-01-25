@@ -17,11 +17,21 @@ class UsersController extends APIController
         // $this->middleware('auth');
     }
 
+    /**
+     * 获取指定用户的信息
+     * @param User $user
+     * @return UserResource
+     */
     public function show(User $user)
     {
         return new UserResource($user->load('avatar'));
     }
 
+    /**
+     * 获取指定用户发布的笑话
+     * @param User $user
+     * @return JokeCollection
+     */
     public function jokes(User $user)
     {
         $jokes = Joke::byUser($user)->latest()->with('image')->paginate($this->perPage());

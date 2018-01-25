@@ -18,6 +18,11 @@ class ImageController extends APIController
         $this->imageService = app(ImageService::class);
     }
 
+    /**
+     * 上传图片
+     * @param Request $request
+     * @return array
+     */
     public function upload(Request $request)
     {
         $image = $request->file($this->imageService->uploadKey());
