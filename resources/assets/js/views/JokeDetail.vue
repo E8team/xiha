@@ -1,7 +1,7 @@
 <template>
   <div class="joke_detail">
     <TNav></TNav>
-    <JokeBody v-if="joke" :joke="joke"></JokeBody>
+    <JokeBody v-if="joke" :user="joke.user" :joke="joke"></JokeBody>
     <JokeBodyPlaceholders v-else/>
     <div class="comment">
       <header>

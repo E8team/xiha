@@ -1,9 +1,9 @@
 <template>
   <div class="joke">
     <header>
-      <div @click="$router.push({name: 'user', params: {id: joke.user.username}})">
-        <img class="user_img" :src="joke.user && joke.user.avatar.cover_url">
-        <div class="user_name">{{joke.user && joke.user.name}}</div>
+      <div @click="$router.push({name: 'user', params: {id: user.username}})">
+        <img class="user_img" :src="user && user.avatar.cover_url">
+        <div class="user_name">{{user && user.name}}</div>
       </div>
     </header>
     <section @click="$router.push({name: 'joke', params: {id: joke.id}})"  class="content">
@@ -41,7 +41,8 @@ export default {
   name: 'JokeBody',
   components: { PhotoSwipe },
   props: {
-    joke: Object
+    joke: Object,
+    user: Object
   },
   computed: {
     items () {

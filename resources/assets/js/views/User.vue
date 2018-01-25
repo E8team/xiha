@@ -16,18 +16,23 @@
         </ul>
       </footer>
     </div>
+    <div class="jokes">
+      <JokeBody :key="item.id" :user="user" :joke="item" v-for="item in jokes"></JokeBody>
+    </div>
   </div>
 </template>
 
 <script>
+import JokeBody from '../components/JokeBody.vue';
 import TNav from '../components/TNav.vue';
 export default {
   components: {
-    TNav
+    TNav, JokeBody
   },
   data () {
     return {
-      user: {}
+      user: {},
+      jokes: []
     };
   },
   computed: {
@@ -42,8 +47,10 @@ export default {
       this.user = this.$store.state.me;
     } else {
       (async () => {
-        let res = await this.$http.get(`users/${this.$route.params.id}`);
-        this.user = res.data.data;
+        let user = await this.$http.get(`users/${this.$route.params.id}`);
+        this.user = user.data.data;
+        let jokes = await this.$http.get(`users/${this.$route.params.id}/jokes`);
+        this.jokes = jokes.data.data;
       })();
     }
   }
@@ -123,6 +130,9 @@ export default {
       }
     }
   }
+}
+.jokes{
+  padding: 10px;
 }
 </style>
 
