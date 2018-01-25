@@ -12,7 +12,7 @@
       {{comment.content}}
     </p>
     <footer>
-      <span class="comment_time">{{comment.create_at | timeAgo}}</span>
+      <span class="comment_time">{{comment.created_at | timeAgo}}</span>
     </footer>
   </div>
 </template>
