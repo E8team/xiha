@@ -32,7 +32,11 @@ class JokesController extends APIController implements VoteController
 
     public function show(Joke $joke)
     {
-        return new JokeResource($joke->load('user', 'user.avatar', 'image', 'comments', 'comments.user', 'comments.user.image'));
+        $joke->load('user', 'user.avatar', 'comments', 'comments.user', 'comments.user.avatar');
+        if ($joke->image_hash) {
+            $joke->load('image');
+        }
+        return new JokeResource($joke);
     }
 
     public function store(JokeRequest $request)
