@@ -1,9 +1,9 @@
 <template>
   <div class="comment_item">
-    <div @click="$router.push({name: 'user', params: {id: joke.user.username}})" class="cover_wrapper">
+    <div @click="$router.push({name: 'user', params: {id: comment.user.username}})" class="cover_wrapper">
       <img :src="comment.user && comment.user.avatar.cover_url">
     </div>
-    <div @click="$router.push({name: 'user', params: {id: joke.user.username}})" class="user_name">{{comment.user.name}}</div>
+    <div @click="$router.push({name: 'user', params: {id: comment.user.username}})" class="user_name">{{comment.user.name}}</div>
     <div class="zan" @click="zan" :class="{'active': comment.me_vote}">
       <i class="iconfont icon-xin"></i>
       <div class="zan_num">{{comment.up_votes_count}}</div>
