@@ -42,7 +42,7 @@ export default {
       }
     }
   },
-  mounted () {
+  activated () {
     if (this.isMine) {
       this.user = this.$store.state.me;
     } else {

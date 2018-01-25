@@ -20,6 +20,16 @@ export default {
     background: #f3f3f3;
     text-rendering: optimizelegibility;
   }
+  @media screen and (min-width: 600px) {
+    body, .scroller{
+      width: 500px!important;
+      margin: 0 auto!important;
+    }  
+    .scroller {
+      left: 50%!important;
+      margin-left: -250px!important;
+    }
+  }
   *{
     box-sizing: border-box;
   }

@@ -41,6 +41,7 @@ export default {
       // 刚刚创建的笑话
       this.joke = lastPublishJoke;
       this.joke.user = this.$store.state.me;
+      this.comments = [];
     } else {
       this.$http.get(`jokes/${this.$route.params.id}`).then(res => {
         this.joke = res.data.data;
