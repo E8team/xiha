@@ -6,6 +6,7 @@ use App\Events\Commented;
 use App\Http\Controllers\APIController;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\JokeRequest;
+use App\Http\Resources\CommentCollection;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\JokeCollection;
 use App\Http\Resources\JokeResource;
@@ -21,7 +22,7 @@ class JokesController extends APIController implements VoteController
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth')->except('index', 'show', 'showComments');
     }
 
     public function index()
@@ -32,7 +33,7 @@ class JokesController extends APIController implements VoteController
 
     public function show(Joke $joke)
     {
-        $joke->load('user', 'user.avatar', 'comments', 'comments.user', 'comments.user.avatar');
+        $joke->load('user', 'user.avatar');
         if ($joke->image_hash) {
             $joke->load('image');
         }
@@ -59,5 +60,11 @@ class JokesController extends APIController implements VoteController
         $comment->up_votes_count = 0;
         event(new Commented($comment, $joke, auth()->user()));
         return new CommentResource($comment);
+    }
+
+    public function showComments(Joke $joke)
+    {
+        $comments = $joke->comments()->latest()->with('user', 'user.avatar')->paginate($this->perPage());
+        return new CommentCollection($comments);
     }
 }

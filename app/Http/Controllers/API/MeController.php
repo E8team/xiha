@@ -22,11 +22,14 @@ class MeController extends APIController
 
     public function update(MeRequest $request)
     {
-        $data = $request->validated();
+        $data = array_filter($request->validated(), function ($item) {
+            return !empty($item);
+        });
         if (isset($data['name']))
             $data['name'] = e($data['name']);
         if (isset($data['introduce']))
             $data['introduce'] = e($data['introduce']);
+
         auth()->user()->update($data);
         return response(null, Response::HTTP_NO_CONTENT);
     }
