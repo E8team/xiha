@@ -1,4 +1,2 @@
 # 嘻哈
-# keyworkds
-real
-respect
+real & respect
