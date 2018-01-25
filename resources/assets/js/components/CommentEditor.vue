@@ -26,6 +26,7 @@ export default {
   display: flex;
   width: 100%;
   height: 35px;
+  box-shadow: 0 -1px 1px 0 rgba(0, 34, 77, 0.05);
   >.mask{
     position: fixed;
     top: 0;
@@ -38,7 +39,6 @@ export default {
   &.focus{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    box-shadow: 0 -1px 1px 0 rgba(0, 34, 77, 0.05);
     .send_btn{
       color: #333;
     }

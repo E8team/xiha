@@ -62,8 +62,7 @@ export default {
       float: left;
       font-size: 24px;
       color: rgb(15, 136, 235);
-      font-family: '宋体';
-      font-weight: bold;
+      font-weight: 100;
     }
   }
 </style>

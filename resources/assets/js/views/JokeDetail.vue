@@ -42,10 +42,12 @@ export default {
       this.joke = lastPublishJoke;
       this.joke.user = this.$store.state.me;
     } else {
-      (async () => {
-        let res = await this.$http.get(`jokes/${this.$route.params.id}`);
+      this.$http.get(`jokes/${this.$route.params.id}`).then(res => {
         this.joke = res.data.data;
-      })();
+      });
+      this.$http.get(`jokes/${this.$route.params.id}/comments`).then(res => {
+        this.comments = res.data.data;
+      });
     }
   }
 };

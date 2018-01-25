@@ -28,7 +28,7 @@ tHttp.install = (Vue, {baseURL, router}) => {
       ...auth
     }
   });
-  Vue.prototype.$http.interceptors.request.use((config) => {
+  /* Vue.prototype.$http.interceptors.request.use((config) => {
     if (config.url.replace(config.baseURL, '') === 'auth/refresh') {
       return config;
     }
@@ -40,14 +40,15 @@ tHttp.install = (Vue, {baseURL, router}) => {
       if (new Date().getTime() > Number(expiryTime)) {
         // jwt_token已经过期
         let res = await Vue.prototype.$http.post('auth/refresh');
-        Vue.prototype.$http.defaults.headers.Authorization = 'Bearer ' + res.data;
-        localStorage.setItem('jwt_token', res.data);
+        Vue.prototype.$http.defaults.headers.Authorization = 'Bearer ' + res.data.access_token;
+        localStorage.setItem('expiry_time', new Date().getTime() + res.data.expiresIn * 1000);
+        localStorage.setItem('jwt_token', res.data.access_token);
       }
     })();
     return config;
   }, (error) => {
     return Promise.reject(error);
-  });
+  });*/
   Vue.prototype.$http.interceptors.response.use((response) => {
     return response;
   }, (error) => {
@@ -55,6 +56,7 @@ tHttp.install = (Vue, {baseURL, router}) => {
       Vue.prototype.$message('请求超时');
     } else if (error.response.status === 401) {
       Vue.prototype.$message('请先登录');
+      router.push({name: 'login'});
     } else if (error.response.status === 422) {
       let errorsTemp = error.response.data.errors;
       for (let index in errorsTemp) {

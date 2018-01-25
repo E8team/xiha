@@ -4,7 +4,7 @@
       <img :src="comment.user && comment.user.avatar.cover_url">
     </div>
     <div @click="$router.push({name: 'user', params: {id: joke.user.username}})" class="user_name">{{comment.user.name}}</div>
-    <div class="zan">
+    <div class="zan" @click="zan" :class="{'active': comment.me_vote}">
       <i class="iconfont icon-xin"></i>
       <div class="zan_num">{{comment.up_votes_count}}</div>
     </div>
@@ -21,6 +21,19 @@ export default {
   name: 'CommentItem',
   props: {
     comment: Object
+  },
+  methods: {
+    async zan () {
+      let res;
+      if (!this.comment.me_vote) {
+        res = await this.$http.patch(`comments/${this.comment.id}/up_vote`);
+        this.comment.me_vote = { type: 'up_vote' };
+      } else {
+        res = await this.$http.patch(`comments/${this.comment.id}/cancel_vote`);
+        this.comment.me_vote = null;
+      }
+      this.comment.up_votes_count = res.data.up_votes_count;
+    }
   }
 };
 </script>
