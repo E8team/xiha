@@ -9,8 +9,18 @@ export default {
   mounted () {
     if (isLogin()) {
       this.$store.dispatch('updateMe');
+      this.getUnreadCount();
+      setInterval(() => {
+        this.getUnreadCount();
+      }, 10000);
     }
-  }
+  },
+  methods: {
+    async getUnreadCount () {
+      let res = await this.$http.get('me/notifications/unread_count');
+      this.$store.commit('UPDATE_UNREAD', res.data.unread);
+    }
+  },
 };
 </script>
 <style lang="less">

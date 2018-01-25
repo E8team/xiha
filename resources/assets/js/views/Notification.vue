@@ -12,7 +12,7 @@
         </header>
         <ul>
           <li @click="read(notification.id, index)" :class="{'readed': notification.read_at}" class="item" v-for="(notification, index) in list" :key="notification.id">
-            <div @click="$router.push({name: 'user', params: {id: notification.data.user.id}})" class="user" v-if="notification.data.user">
+            <div @click="$router.push({name: 'user', params: {id: notification.data.user.username}})" class="user" v-if="notification.data.user">
               <img :src="notification.data.user.avatar.avatar_xs" alt="">
               <div class="user_name">{{notification.data.user.name}}</div>
             </div>

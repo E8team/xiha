@@ -6,7 +6,8 @@ Vue.use(Vuex);
 const state = {
   me: null,
   lastPublishJoke: null,
-  lastHomePos: null
+  lastHomePos: null,
+  unread: 0
 };
 export default new Vuex.Store({
   state,
@@ -19,7 +20,10 @@ export default new Vuex.Store({
     },
     UPDATE_LAST_HOME_POS (state, pos) {
       state.lastHomePos = pos;
-    }
+    },
+    UPDATE_UNREAD (state, unread) {
+      state.unread = unread;
+    },
   },
   actions: {
     updateMe ({ commit }) {

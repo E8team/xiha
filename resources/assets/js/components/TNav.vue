@@ -17,32 +17,16 @@
 </template>
 
 <script>
-import { isLogin } from '../utils/utils';
+
 export default {
   name: 'TNav',
   computed: {
     me () {
       return this.$store.state.me;
     },
-  },
-  methods: {
-    async getUnreadCount () {
-      let res = await this.$http.get('me/notifications/unread_count');
-      this.hasNotify = res.data.unread > 0;
+    hasNotify () {
+      return this.$store.state.unread > 0;
     }
-  },
-  mounted () {
-    if (isLogin()) {
-      this.getUnreadCount();
-      setInterval(() => {
-        this.getUnreadCount();
-      }, 5000);
-    }
-  },
-  data () {
-    return {
-      hasNotify: false
-    };
   }
 };
 </script>
