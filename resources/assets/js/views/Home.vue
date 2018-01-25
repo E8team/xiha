@@ -9,7 +9,6 @@
       :on-infinite="infinite">
       <JokeBody :user="item.user" :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
     </scroller>
-    <p v-if="isNull" class="no_data">Σ(ﾟдﾟ;) 笑话还没赶到</p>
     <JokeBodyPlaceholders class="joke_body_placeholders" v-if="!isNull && jokes.length=='0'" :length="3"/>
   </div>
 </template>
