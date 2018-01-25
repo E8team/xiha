@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Events\Commented;
+use App\Events\CreatedJoke;
 use App\Http\Controllers\APIController;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\JokeRequest;
@@ -48,6 +49,7 @@ class JokesController extends APIController implements VoteController
         $joke = Joke::create($data)->load('image');
         $joke->comments_count = 0;
         $joke->up_votes_count = 0;
+        event(new CreatedJoke($joke, auth()->user()));
         return new JokeResource($joke);
     }
 
