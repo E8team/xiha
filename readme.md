@@ -1,5 +1,7 @@
-# 嘻哈 This is a demo project for vue + laravel.
+# 嘻哈 
 real & respect
+## This is a demo project for vue + laravel.
+
 ## [demo](http://hiphop.e8net.cn/)
 
 
