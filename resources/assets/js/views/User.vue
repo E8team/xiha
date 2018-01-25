@@ -34,8 +34,7 @@ export default {
   },
   data () {
     return {
-      user: {},
-      jokes: []
+      user: {}
     };
   },
   computed: {
@@ -45,19 +44,28 @@ export default {
       }
     }
   },
-  activated () {
-    if (this.isMine) {
-      this.user = this.$store.state.me;
-    } else {
-      (async () => {
-        let user = await this.$http.get(`users/${this.$route.params.id}`);
-        this.user = user.data.data;
-      })();
+  methods: {
+    init () {
+      if (this.isMine) {
+        this.user = this.$store.state.me;
+      } else {
+        (async () => {
+          let user = await this.$http.get(`users/${this.$route.params.id}`);
+          this.user = user.data.data;
+        })();
+      }
     }
-    (async () => {
-      let jokes = await this.$http.get(`users/${this.$route.params.id}/jokes`);
-      this.jokes = jokes.data.data;
-    })();
+  },
+  activated () {
+    this.init();
+  },
+  watch: {
+    $route ($route) {
+      if ($route.name !== 'user') {
+        return;
+      }
+      this.init();
+    }
   }
 };
 </script>

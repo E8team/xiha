@@ -2,7 +2,7 @@
   <div class="joke">
     <header>
       <div @click="$router.push({name: 'user', params: {id: user.username}})">
-        <img class="user_img" :src="user && user.avatar.avatar_sm">
+        <img class="user_img" :src="user.avatar && user.avatar.avatar_sm">
         <div class="user_name">{{user && user.name}}</div>
       </div>
       <div class="time">{{joke.created_at | timeAgo}}</div>

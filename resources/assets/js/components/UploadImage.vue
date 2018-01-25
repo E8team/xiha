@@ -34,7 +34,9 @@ export default {
       formData.append('image', file);
       this.src = window.URL.createObjectURL(file);
       try {
-        let res = await this.$http.post('ajax_upload_image', formData);
+        let res = await this.$http.post('ajax_upload_image', formData, {
+          timeout: 30000
+        });
         this.$emit('change', res.data.image_hash);
         this.uploaded = true;
       } catch (e) {
