@@ -36,6 +36,13 @@ class MeController extends APIController
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
+    public function showUnreadNotificationsCount()
+    {
+        return [
+            'unread' => auth()->user()->unreadNotifications()->count()
+        ];
+    }
+
     public function getNotifications()
     {
         return new NotificationCollection(auth()->user()->notifications);
