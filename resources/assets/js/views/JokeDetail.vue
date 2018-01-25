@@ -35,7 +35,7 @@ export default {
       this.comments.unshift(res.data.data);
     }
   },
-  mounted () {
+  activated () {
     let lastPublishJoke = this.$store.state.lastPublishJoke;
     if (lastPublishJoke && this.$route.params.id === lastPublishJoke.id) {
       // 刚刚创建的笑话

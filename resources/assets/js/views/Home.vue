@@ -4,6 +4,7 @@
     <scroller
       class="scroller"
       ref="scroller"
+      noDataText="(･∀･) 到底了！"
       :on-refresh="refresh"
       :on-infinite="infinite">
       <JokeBody :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
@@ -36,10 +37,11 @@ export default {
       done();
     },
     async infinite (done) {
+      let len = 0;
       if (this.links.next) {
-        await this.getJokes(this.links.next);
+        len = await this.getJokes(this.links.next);
       }
-      done();
+      done(len === 0);
     },
     async getJokes (link) {
       let res = await this.$http.get(link || 'jokes');
