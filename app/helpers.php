@@ -27,7 +27,6 @@ if (!function_exists('image_url')) {
 
         } else {
             $path = $config['source_path_prefix'] . '/' . substr($imageId, 0, 2) . '/' . $imageId;
-
             if (is_array($style)) {
                 $style = array_merge($config['default_style'], $style);
             } elseif (isset($config['presets'][$style])) {
@@ -35,7 +34,6 @@ if (!function_exists('image_url')) {
             } else {
                 $style = null;
             }
-
             if (!empty($style)) {
                 if (isset($style['q'])) {
                     $q = "q/{$style['q']}|imageslim";
@@ -44,8 +42,7 @@ if (!function_exists('image_url')) {
                 }
                 // $parameters = "?imageView2/1/w/{$style['w']}/h/{$style['h']}/format/$style['fm']" . $q;
 
-                $parameters = '?imageView2/1/' . (isset($style['w']) ? "w/{$style['w']}/" : '') . (isset($style['h']) ? "h/{$style['h']}/" : '') . (isset($style['fm']) ? "format/{$style['fm']}" : '') . $q;
-
+                $parameters = '?imageView2/1/' . (isset($style['w']) ? "w/{$style['w']}/" : '') . (isset($style['h']) ? "h/{$style['h']}/" : '') . (isset($style['fm']) ? "format/{$style['fm']}/" : '') . $q;
             } else {
                 $parameters = '';
             }
