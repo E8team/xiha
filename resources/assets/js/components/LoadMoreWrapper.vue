@@ -2,7 +2,8 @@
   <div>
     <slot :data="list"></slot>
     <slot name="bottom">
-      <div v-if="loading && !isEnd" class="loading">加载中...</div>
+      <div v-if="loading && !isEnd" class="text">加载中...</div>
+      <div v-if="isEnd" class="text">(･∀･) 到底了</div>
     </slot>
   </div>
 </template>
@@ -36,7 +37,7 @@ export default {
       } else {
         this.list = res.data.data;
       }
-      if (this.list.length < res.data.meta.per_page) {
+      if (this.list.length === 0 || this.list.length < res.data.meta.per_page) {
         this.isEnd = true;
       }
       return this.list.length;
@@ -58,7 +59,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.loading{
+.text{
   margin-top: 10px;
   color: #777;
   text-align: center;

@@ -34,7 +34,7 @@ export default {
     async refresh (done) {
       if (!this.jokes[0]) {
         done();
-        return ;
+        return;
       }
       let res = await this.$http.get('jokes', {
         params: {

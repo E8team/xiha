@@ -15,7 +15,11 @@
       </footer>
     </div>
     <div class="jokes">
-      <JokeBody :key="item.id" :user="user" :joke="item" v-for="item in jokes"></JokeBody>
+      <LoadMoreWrapper :url="`users/${this.$route.params.id}/jokes`">
+        <template slot-scope="props">
+          <JokeBody :key="item.id" :user="user" :joke="item" v-for="item in props.data"></JokeBody>
+        </template>
+      </LoadMoreWrapper>
     </div>
   </div>
 </template>
@@ -23,9 +27,10 @@
 <script>
 import JokeBody from '../components/JokeBody.vue';
 import TNav from '../components/TNav.vue';
+import LoadMoreWrapper from '../components/LoadMoreWrapper.vue';
 export default {
   components: {
-    TNav, JokeBody
+    TNav, JokeBody, LoadMoreWrapper
   },
   data () {
     return {
