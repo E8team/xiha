@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use App\Events\Commented;
+use App\Events\CreatedJoke;
+use App\Listeners\Notify;
 use App\Listeners\UpdateUserCommentsCount;
+use App\Listeners\UpdateUserJokesCount;
 use Ty666\LaravelVote\Events\Voted;
 use App\Listeners\UpdateUserVoteCount;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,10 +20,15 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Voted::class => [
-            UpdateUserVoteCount::class
+            UpdateUserVoteCount::class,
+            Notify::class
         ],
         Commented::class => [
-            UpdateUserCommentsCount::class
+            UpdateUserCommentsCount::class,
+            Notify::class
+        ],
+        CreatedJoke::class => [
+            UpdateUserJokesCount::class
         ]
     ];
 
