@@ -12,6 +12,7 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\JokeCollection;
 use App\Http\Resources\JokeResource;
 use App\Models\Joke;
+use Illuminate\Http\Request;
 use Ty666\LaravelVote\Contracts\VoteController;
 use Ty666\LaravelVote\Traits\VoteControllerHelper;
 
@@ -26,9 +27,12 @@ class JokesController extends APIController implements VoteController
         $this->middleware('auth')->except('index', 'show', 'showComments');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $jokes = Joke::latest()->with('image', 'user', 'user.avatar')->paginate($this->perPage());
+        $query = Joke::latest();
+        if ($request->has('last_id'))
+            $query->where('id', '>', intval($request->get('last_id')));
+        $jokes = $query->with('image', 'user', 'user.avatar')->paginate($this->perPage());
         return new JokeCollection($jokes);
     }
 
