@@ -28,6 +28,12 @@ export default {
       }
     };
   },
+  activated () {
+    this.joke = {
+      content: null,
+      image_hash: null
+    };
+  },
   methods: {
     async publish () {
       try {

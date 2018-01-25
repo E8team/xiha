@@ -5,7 +5,7 @@
       <Cell title="头像">
         <div class="cover_wrapper">
           <input @change="upload" type="file">
-          <img class="cover" @change="upload" :src="uploadSrc || me.avatar && me.avatar.cover_url" :alt="me.name">
+          <img class="cover" @change="upload" :src="uploadSrc || me.avatar && me.avatar.avatar_sm" :alt="me.name">
         </div>
       </Cell>
       <Cell @click.native="showNameDialog = true" title="昵称">{{me.name}}</Cell>
@@ -86,7 +86,7 @@ export default {
       try {
         let res = await this.$http.post('ajax_upload_image', formData);
         await this.patchMe('avatar_hash', res.data.image_hash);
-        this.$store.state.me.avatar.cover_url = this.uploadSrc;
+        this.$store.state.me.avatar.avatar_sm = this.uploadSrc;
         this.$store.commit('UPDATE_ME', this.$store.state.me);
       } catch (e) {
         this.uploadSrc = null;

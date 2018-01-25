@@ -4,7 +4,7 @@
     <router-link v-if="!me" class="login_btn" :to="{name: 'login'}">登录 · 注册</router-link>
     <template v-else>
       <div @click="$router.push({name: 'user', params: {id: me.username}})" class="cover_wrapper">
-        <img :src="me.avatar.cover_url" :alt="me.name">
+        <img :src="me.avatar.avatar_sm" :alt="me.name">
       </div>
       <div @click="$router.push({name: 'publish'})" class="publish_btn">
         <i class="iconfont icon-tianjia"></i>

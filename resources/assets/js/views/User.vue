@@ -3,7 +3,7 @@
     <TNav></TNav>
     <div class="user_info_block">
       <div class="cover">
-        <img :src="user.avatar && user.avatar.cover_url" :alt="user.name">
+        <img :src="user.avatar && user.avatar.avatar_sm" :alt="user.name">
       </div>
       <h1>{{user.name}} <a class="github_link" :href="user.github_url"><i class="iconfont icon-github"></i></a></h1>
       <p class="intro">{{user.introduce}}</p>
@@ -11,8 +11,6 @@
       <footer>
         <ul>
           <li class="active">投稿 <span class="tip">({{user.jokes_count}})</span></li>
-          <li>回复</li>
-          <li>赞</li>
         </ul>
       </footer>
     </div>
