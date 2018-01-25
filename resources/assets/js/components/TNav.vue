@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { isLogin } from '../utils/utils';
 export default {
   name: 'TNav',
   computed: {
@@ -31,10 +32,12 @@ export default {
     }
   },
   mounted () {
-    this.getUnreadCount();
-    setInterval(() => {
+    if (isLogin()) {
       this.getUnreadCount();
-    }, 5000);
+      setInterval(() => {
+        this.getUnreadCount();
+      }, 5000);
+    }
   },
   data () {
     return {
