@@ -40,7 +40,10 @@ class JokesController extends APIController implements VoteController
         $data = $request->validated();
         $data['content'] = isset($data['content']) ? e($data['content']) : '';
         $data['user_id'] = auth()->id();
-        return new JokeResource(Joke::create($data)->load('image'));
+        $joke = Joke::create($data)->load('image');
+        $joke->comments_count = 0;
+        $joke->up_votes_count = 0;
+        return new JokeResource($joke);
     }
 
     public function storeComment(Joke $joke, CommentRequest $request)
@@ -49,6 +52,7 @@ class JokesController extends APIController implements VoteController
         $data['content'] = e($data['content']);
         $data['user_id'] = auth()->id();
         $comment = $joke->comments()->create($data);
+        $comment->up_votes_count = 0;
         event(new Commented($comment, $joke, auth()->user()));
         return new CommentResource($comment);
     }
