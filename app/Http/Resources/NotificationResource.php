@@ -18,7 +18,7 @@ class NotificationResource extends Resource
         return [
             'id' => $this->id,
             'type' => snake_case(class_basename($this->type)),
-            'user' => new UserResource(User::find($this->notifiable_id)),
+            // 'user' => new UserResource(User::find($this->notifiable_id)),
             'data' => $this->data,
             'read_at' => toIso8601String($this->read_at),
             'created_at' => toIso8601String($this->created_at),
