@@ -13,4 +13,10 @@ class Comment extends BaseModel implements CanCountUpVotesModel
 
     protected $upVotesCountField = 'up_votes_count';
 
+    protected $fillable = ['comment', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

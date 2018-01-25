@@ -46,6 +46,7 @@ class JokesController extends APIController implements VoteController
     public function storeComment(Joke $joke, CommentRequest $request)
     {
         $data = $request->validated();
+        $data['content'] = e($data['content']);
         $data['user_id'] = auth()->id();
         $comment = $joke->comments()->create($data);
         event(new Commented($comment, $joke, auth()->user()));
