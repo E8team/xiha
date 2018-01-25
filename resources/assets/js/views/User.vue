@@ -47,10 +47,12 @@ export default {
       (async () => {
         let user = await this.$http.get(`users/${this.$route.params.id}`);
         this.user = user.data.data;
-        let jokes = await this.$http.get(`users/${this.$route.params.id}/jokes`);
-        this.jokes = jokes.data.data;
       })();
     }
+    (async () => {
+      let jokes = await this.$http.get(`users/${this.$route.params.id}/jokes`);
+      this.jokes = jokes.data.data;
+    })();
   }
 };
 </script>
