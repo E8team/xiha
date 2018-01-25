@@ -19,4 +19,5 @@ class Comment extends BaseModel implements CanCountUpVotesModel
     {
         return $this->belongsTo(User::class);
     }
+
 }

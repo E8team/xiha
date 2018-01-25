@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use Ty666\LaravelVote\Events\Voted;
+use App\Events\Commented;
 
-class UpdateUserVoteCount
+class UpdateUserCommentsCount
 {
     /**
      * Create the event listener.
@@ -22,13 +22,8 @@ class UpdateUserVoteCount
      * @param  $event
      * @return void
      */
-    public function handle(Voted $event)
+    public function handle(Commented $event)
     {
-        $upVoteChange = $event->getChange()['up_vote'];
-        if ($upVoteChange > 0) {
-            $event->getTargetModel()->user()->increment('up_votes_count', $upVoteChange);
-        } elseif ($upVoteChange < 0) {
-            $event->getTargetModel()->user()->where('up_votes_count', '>', 0)->decrement('up_votes_count', abs($upVoteChange));
-        }
+        $event->joke->increment('comments_count');
     }
 }

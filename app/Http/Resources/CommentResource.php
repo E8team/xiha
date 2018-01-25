@@ -17,6 +17,7 @@ class CommentResource extends Resource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'user' => new UserResource($this->whenLoaded('user')),
             'up_votes_count' => $this->up_votes_count,
             'content' => $this->content,
             'created_at' => toIso8601String($this->created_at),

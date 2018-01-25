@@ -20,6 +20,7 @@ class JokeResource extends Resource
             'user' => new UserResource($this->whenLoaded('user')),
             'image' => new ImageResource($this->whenLoaded('image')),
             'comments_count' => $this->comments_count,
+            'comments' => new CommentCollection($this->whenLoaded('comments')),
             'up_votes_count' => $this->up_votes_count,
             $this->mergeWhen(auth()->check(), function () {
                 // todo 如何优化?
