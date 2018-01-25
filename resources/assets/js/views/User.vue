@@ -15,7 +15,7 @@
       </footer>
     </div>
     <div class="jokes">
-      <LoadMoreWrapper :url="`users/${this.$route.params.id}/jokes`">
+      <LoadMoreWrapper :url="`users/${this.$route.params.id}/jokes`" ref="jokesLoadMore">
         <template slot-scope="props">
           <JokeBody :key="item.id" :user="user" :joke="item" v-for="item in props.data"></JokeBody>
         </template>
@@ -65,6 +65,7 @@ export default {
         return;
       }
       this.init();
+      this.$refs.jokesLoadMore.refresh(`users/${this.$route.params.id}/jokes`);
     }
   }
 };

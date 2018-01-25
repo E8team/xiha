@@ -3,7 +3,7 @@
     <TNav></TNav>
     <JokeBody v-if="joke" :user="joke.user" :joke="joke"></JokeBody>
     <JokeBodyPlaceholders v-else/>
-    <LoadMoreWrapper :url="`jokes/${this.$route.params.id}/comments`" :addComment="addComment">
+    <LoadMoreWrapper :url="`jokes/${this.$route.params.id}/comments`" ref="commentLoadMore">
       <template slot-scope="props">
         <div class="comment">
           <header>
@@ -29,15 +29,14 @@ export default {
   components: { TNav, JokeBody, CommentItem, JokeBodyPlaceholders, CommentEditor, LoadMoreWrapper },
   data () {
     return {
-      joke: null,
-      addComment: null
+      joke: null
     };
   },
   methods: {
     async sendComment (text) {
       let res = await this.$http.post(`jokes/${this.$route.params.id}/comment`, {content: text});
       res.data.data.user = this.$store.state.me;
-      this.addComment = res.data.data;
+      this.$refs.commentLoadMore.addItem(res.data.data);
     }
   },
   activated () {
