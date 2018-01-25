@@ -24,7 +24,7 @@ class UsersController extends APIController
 
     public function jokes(User $user)
     {
-        $jokes = Joke::byUser($user)->latest()->paginate($this->perPage());
-        return new JokeCollection($jokes->load('image'));
+        $jokes = Joke::byUser($user)->latest()->with('image')->paginate($this->perPage());
+        return new JokeCollection($jokes);
     }
 }
