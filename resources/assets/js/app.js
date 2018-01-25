@@ -11,6 +11,12 @@ import store from './vuex/store';
 import VueScroller from 'vue-scroller';
 import VueContentPlaceholders from 'vue-content-placeholders';
 import DomPortal from 'vue-dom-portal';
+import * as filters from './utils/filters';
+
+// register global utility filters.
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key]);
+});
 
 Vue.prototype.$message = message;
 
