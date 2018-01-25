@@ -17,11 +17,20 @@ class MeController extends APIController
         $this->middleware('auth');
     }
 
+    /**
+     * 获取当前登录者的信息
+     * @return UserResource
+     */
     public function show()
     {
         return new UserResource(auth()->user()->load('avatar'));
     }
 
+    /**
+     * 修改个人资料
+     * @param MeRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     */
     public function update(MeRequest $request)
     {
         $data = array_filter($request->validated(), function ($item) {
@@ -36,6 +45,10 @@ class MeController extends APIController
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
+    /**
+     * 获取未读消息的数量
+     * @return array
+     */
     public function showUnreadNotificationsCount()
     {
         return [
@@ -43,11 +56,19 @@ class MeController extends APIController
         ];
     }
 
+    /**
+     * 获取消息通知
+     * @return array
+     */
     public function getNotifications()
     {
         return new NotificationCollection(auth()->user()->notifications);
     }
 
+    /**
+     * 将消息通知标记为已读
+     * @return array
+     */
     public function markAsRead($id = null)
     {
         // 如果 id 为 null，表示将全部消息标记为已读
