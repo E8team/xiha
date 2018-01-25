@@ -1,7 +1,7 @@
 <template>
   <div class="comment_item">
     <div @click="$router.push({name: 'user', params: {id: comment.user.username}})" class="cover_wrapper">
-      <img :src="comment.user && comment.user.avatar.cover_url">
+      <img :src="comment.user && comment.user.avatar.avatar_sm">
     </div>
     <div @click="$router.push({name: 'user', params: {id: comment.user.username}})" class="user_name">{{comment.user.name}}</div>
     <div class="zan" @click="zan" :class="{'active': comment.me_vote}">

@@ -2,7 +2,7 @@
   <div class="joke">
     <header>
       <div @click="$router.push({name: 'user', params: {id: user.username}})">
-        <img class="user_img" :src="user && user.avatar.cover_url">
+        <img class="user_img" :src="user && user.avatar.avatar_sm">
         <div class="user_name">{{user && user.name}}</div>
       </div>
       <div class="time">{{joke.created_at | timeAgo}}</div>
@@ -10,7 +10,7 @@
     <section @click="$router.push({name: 'joke', params: {id: joke.id}})"  class="content">
       <div>{{joke.content}}</div>
       <div @click.stop="$refs['photoSwipe'].show()" v-if="joke.image" :class="{'gif': joke.image.is_gif, 'high': joke.image.is_high}" class="img">
-        <img :src="joke.image.cover_url" alt="">
+        <img :src="joke.image.joke_cover" alt="">
       </div>
     </section>
     <footer>
