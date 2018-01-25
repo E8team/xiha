@@ -6,7 +6,10 @@
       <div @click="$router.push({name: 'user', params: {id: me.username}})" class="cover_wrapper">
         <img :src="me.avatar.avatar_sm" :alt="me.name">
       </div>
-      <div @click="$router.push({name: 'publish'})" class="publish_btn">
+      <div @click="$router.push({name: 'notification'})" class="icon_btn" :class="{'has_notify': hasNotify}">
+        <i class="iconfont icon-tongzhi"></i>
+      </div>
+      <div @click="$router.push({name: 'publish'})" class="icon_btn">
         <i class="iconfont icon-tianjia"></i>
       </div>
     </template>
@@ -21,6 +24,23 @@ export default {
       return this.$store.state.me;
     },
   },
+  methods: {
+    async getUnreadCount () {
+      let res = await this.$http.get('me/notifications/unread_count');
+      this.hasNotify = res.data.unread > 0;
+    }
+  },
+  mounted () {
+    this.getUnreadCount();
+    setInterval(() => {
+      this.getUnreadCount();
+    }, 5000);
+  },
+  data () {
+    return {
+      hasNotify: false
+    };
+  }
 };
 </script>
 
@@ -33,12 +53,25 @@ export default {
     border-bottom: 1px solid rgba(30,35,42,.06);
     position: relative;
     z-index: 11;
-    >.publish_btn{
+    >.icon_btn{
       float: right;
+      position: relative;
       >i{ 
         font-size: 24px;
         color: #666;
         margin-right: 15px;
+      }
+      &.has_notify::after{
+        content: '';
+        position: absolute;
+        top: 13px;
+        right: 16px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: red;
+        border: 1.5px solid #fff;
+        box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
       }
     }
     >.cover_wrapper{

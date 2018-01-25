@@ -3,13 +3,17 @@
     <TNav></TNav>
     <JokeBody v-if="joke" :user="joke.user" :joke="joke"></JokeBody>
     <JokeBodyPlaceholders v-else/>
-    <div class="comment">
-      <header>
-        <h3>评论<span class="comment_num">({{joke && joke.comments_count}})</span></h3>
-      </header>
-      <p v-if="comments.length === 0" class="no_data">Σ(ﾟдﾟ;) 还没有评论</p>
-      <CommentItem :comment="comment" v-for="comment in comments" :key="comment.id"/>
-    </div>
+    <LoadMoreWrapper :url="`jokes/${this.$route.params.id}/comments`" :addComment="addComment">
+      <template slot-scope="props">
+        <div class="comment">
+          <header>
+            <h3>评论<span class="comment_num">({{joke && joke.comments_count}})</span></h3>
+          </header>
+          <p v-if="props.data.length === 0" class="no_data">Σ(ﾟдﾟ;) 还没有评论</p>
+          <CommentItem :comment="comment" v-for="comment in props.data" :key="comment.id"/>
+        </div>
+      </template>
+    </LoadMoreWrapper>
     <CommentEditor @send_comment="sendComment"></CommentEditor>
   </div>
 </template>  
@@ -20,19 +24,21 @@ import JokeBody from '../components/JokeBody.vue';
 import CommentItem from '../components/CommentItem.vue';
 import JokeBodyPlaceholders from '../components/JokeBodyPlaceholders.vue';
 import CommentEditor from '../components/CommentEditor.vue';
+import LoadMoreWrapper from '../components/LoadMoreWrapper.vue';
 export default {
-  components: { TNav, JokeBody, CommentItem, JokeBodyPlaceholders, CommentEditor },
+  components: { TNav, JokeBody, CommentItem, JokeBodyPlaceholders, CommentEditor, LoadMoreWrapper },
   data () {
     return {
       joke: null,
-      comments: []
+      comments: [],
+      addComment: null
     };
   },
   methods: {
     async sendComment (text) {
       let res = await this.$http.post(`jokes/${this.$route.params.id}/comment`, {content: text});
       res.data.data.user = this.$store.state.me;
-      this.comments.unshift(res.data.data);
+      this.addComment = res.data.data;
     }
   },
   activated () {
@@ -43,12 +49,13 @@ export default {
       this.joke.user = this.$store.state.me;
       this.comments = [];
     } else {
+      this.joke = null;
       this.$http.get(`jokes/${this.$route.params.id}`).then(res => {
         this.joke = res.data.data;
       });
-      this.$http.get(`jokes/${this.$route.params.id}/comments`).then(res => {
-        this.comments = res.data.data;
-      });
+      // this.$http.get(`jokes/${this.$route.params.id}/comments`).then(res => {
+      //   this.comments = res.data.data;
+      // });
     }
   }
 };
@@ -56,7 +63,7 @@ export default {
 
 <style lang="less" scoped>
 .joke_detail{
-  padding-bottom: 45px;
+  padding-bottom: 60px;
 }
 .comment{
   margin-top: 10px;

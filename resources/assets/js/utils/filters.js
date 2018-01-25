@@ -1,10 +1,18 @@
+import { strLimit } from './utils';
+
 export function timeAgo (time) {
   const between = Date.now() / 1000 - new Date(time).getTime() / 1000;
   if (between < 3600) {
-    return ~~(between / 60) + ' 分钟';
+    return ~~(between / 60) + ' 分钟前';
   } else if (between < 86400) {
-    return ~~(between / 3600) + ' 小时';
+    return ~~(between / 3600) + ' 小时前';
+  } else if (between < 2592000) {
+    return ~~(between / 86400) + ' 天前';
   } else {
-    return ~~(between / 86400) + ' 天';
+    return time.substring(0, 10);
   }
+}
+
+export function limit (str, limt) {
+  return strLimit(str, limt);
 }

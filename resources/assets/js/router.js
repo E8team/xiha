@@ -22,6 +22,11 @@ const router = new Router({
     component: require('./views/Publish.vue'),
   },
   {
+    path: '/notification',
+    name: 'notification',
+    component: require('./views/Notification.vue'),
+  },
+  {
     path: '/user/settings',
     name: 'userSettings',
     component: require('./views/UserSettings.vue'),
