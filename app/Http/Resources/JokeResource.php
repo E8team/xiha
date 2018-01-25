@@ -18,7 +18,7 @@ class JokeResource extends Resource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'user' => new UserResource($this->whenLoaded('user')),
-            'image' => new ImageResource($this->whenLoaded('image'), ['jokecover']),
+            'image' => new ImageResource($this->whenLoaded('image'), ['joke_cover']),
             'comments_count' => $this->comments_count,
             'comments' => new CommentCollection($this->whenLoaded('comments')),
             'up_votes_count' => $this->up_votes_count,
