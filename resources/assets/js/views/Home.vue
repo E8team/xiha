@@ -4,11 +4,11 @@
     <scroller
       class="scroller"
       ref="scroller"
+      noDataText="(･∀･) 到底了！"
       :on-refresh="refresh"
       :on-infinite="infinite">
-      <JokeBody :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
+      <JokeBody :user="item.user" :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
     </scroller>
-    <p v-if="isNull" class="no_data">Σ(ﾟдﾟ;) 笑话还没赶到</p>
     <JokeBodyPlaceholders class="joke_body_placeholders" v-if="!isNull && jokes.length=='0'" :length="3"/>
   </div>
 </template>
@@ -36,10 +36,11 @@ export default {
       done();
     },
     async infinite (done) {
+      let len = 0;
       if (this.links.next) {
-        await this.getJokes(this.links.next);
+        len = await this.getJokes(this.links.next);
       }
-      done();
+      done(len === 0);
     },
     async getJokes (link) {
       let res = await this.$http.get(link || 'jokes');

@@ -1,7 +1,7 @@
 <template>
   <div class="joke_detail">
     <TNav></TNav>
-    <JokeBody v-if="joke" :joke="joke"></JokeBody>
+    <JokeBody v-if="joke" :user="joke.user" :joke="joke"></JokeBody>
     <JokeBodyPlaceholders v-else/>
     <div class="comment">
       <header>
@@ -35,7 +35,7 @@ export default {
       this.comments.unshift(res.data.data);
     }
   },
-  mounted () {
+  activated () {
     let lastPublishJoke = this.$store.state.lastPublishJoke;
     if (lastPublishJoke && this.$route.params.id === lastPublishJoke.id) {
       // 刚刚创建的笑话
