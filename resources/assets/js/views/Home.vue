@@ -31,8 +31,20 @@ export default {
     next();
   },
   methods: {
-    refresh (done) {
-      console.log('refresh');
+    async refresh (done) {
+      let res = await this.$http.get('jokes', {
+        params: {
+          last_id: this.jokes[0].id
+        }
+      });
+      let len = res.data.data.length;
+      if (len > 0) {
+        this.jokes.unshift(res.data.data);
+      }
+      this.$message({
+        msg: `${len}条新笑话`,
+        type: 'info'
+      });
       done();
     },
     async infinite (done) {

@@ -5,7 +5,6 @@
       class="scroller"
       ref="scroller"
       noDataText="(･∀･) 到底了！"
-      :on-refresh="refresh"
       :on-infinite="infinite">
       <div class="notification_list">
         <header>
@@ -57,10 +56,6 @@ export default {
           notification.read_at = true;
         });
       }
-    },
-    refresh (done) {
-      console.log('refresh');
-      done();
     },
     async infinite (done) {
       let len = 0;
