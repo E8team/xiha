@@ -5,6 +5,7 @@
         <img class="user_img" :src="user && user.avatar.cover_url">
         <div class="user_name">{{user && user.name}}</div>
       </div>
+      <div class="time">{{joke.created_at | timeAgo}}</div>
     </header>
     <section @click="$router.push({name: 'joke', params: {id: joke.id}})"  class="content">
       <div>{{joke.content}}</div>
@@ -96,6 +97,14 @@ export default {
   header {
     display: flex;
     flex-direction: row;
+    position: relative;
+    .time{
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      font-size: 12px;
+      color: #999;
+    }
     .user_img{
       border-radius: 2px;
       width: 38px;
