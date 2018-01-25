@@ -23,7 +23,7 @@ class UserResource extends Resource
             /*$this->mergeWhen($this->resource->relationLoaded('avatar'), [
                 'avatar_url' => $this->avatar->url
             ]),*/
-            'avatar' => new ImageResource($this->whenLoaded('avatar')),
+            'avatar' => new ImageResource($this->whenLoaded('avatar'), ['avatar_xs', 'avatar_sm']),
             'github_url' => $this->github_url,
             'jokes_count' => $this->jokes_count,
             'up_votes_count' => $this->votes_count,
