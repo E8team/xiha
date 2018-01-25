@@ -31,8 +31,8 @@ export default {
   methods: {
     async sendComment (text) {
       let res = await this.$http.post(`jokes/${this.$route.params.id}/comment`, {content: text});
-      res.data.user = this.$store.state.me;
-      this.comments.push(res.data);
+      res.data.data.user = this.$store.state.me;
+      this.comments.unshift(res.data.data);
     }
   },
   mounted () {
@@ -54,6 +54,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.joke_detail{
+  padding-bottom: 45px;
+}
 .comment{
   margin-top: 10px;
   background: #fff;
