@@ -12,3 +12,6 @@ real & respect
 <img src="https://raw.githubusercontent.com/E8team/xiha/master/screenshots/4.png" width="293" />
 <img src="https://raw.githubusercontent.com/E8team/xiha/master/screenshots/5.png" width="293" />
 <img src="https://raw.githubusercontent.com/E8team/xiha/master/screenshots/6.png" width="293" />
+
+# License
+MIT
