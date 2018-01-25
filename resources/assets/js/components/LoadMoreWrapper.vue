@@ -43,8 +43,11 @@ export default {
       return this.list.length;
     }
   },
-  mounted () {
+  activated () {
+    this.list = [];
     this.getList(this.url);
+  },
+  mounted () {
     window.onscroll = (e) => {
       let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
       if (document.documentElement.scrollHeight === document.documentElement.clientHeight + scrollTop) {
