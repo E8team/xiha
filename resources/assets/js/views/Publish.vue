@@ -6,7 +6,7 @@
     </header>
     <div class="input_wrapper">
       <textarea v-model="joke.content" placeholder="请开始你的表演" rows="6"></textarea>
-      <UploadImage @change="image_hash => {joke.image_hash = image_hash}"></UploadImage>
+      <UploadImage @is_upload="isUp => {isUpload = isUp}" @change="image_hash => {joke.image_hash = image_hash}"></UploadImage>
     </div>
   </div>
 </template>
@@ -17,7 +17,10 @@ export default {
   components: { UploadImage },
   computed: {
     canPublish () {
-      return !(!!this.joke.content || !!this.joke.image_hash);
+      if (!this.isUpload) {
+        return !this.joke.content;
+      }
+      return !this.joke.image_hash;
     }
   },
   data () {
@@ -25,7 +28,8 @@ export default {
       joke: {
         content: null,
         image_hash: null
-      }
+      },
+      isUpload: false
     };
   },
   activated () {

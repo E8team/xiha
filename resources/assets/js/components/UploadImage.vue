@@ -22,8 +22,10 @@ export default {
     close () {
       this.src = null;
       this.$emit('change', null);
+      this.$emit('is_upload', false);
     },
     async upload ({ srcElement: { files: {0: file} } }) {
+      this.$emit('is_upload', true);
       let formData = new FormData();
       formData.append('image', file);
       this.src = window.URL.createObjectURL(file);
