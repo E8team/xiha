@@ -19,6 +19,10 @@ class CommentResource extends Resource
             'user_id' => $this->user_id,
             'user' => new UserResource($this->whenLoaded('user')),
             'up_votes_count' => $this->up_votes_count,
+            $this->mergeWhen(auth()->check(), function () {
+                // todo 如何优化?
+                return ['me_vote' => new VoteResource($this->getVoteInfoByUser(auth()->user()))];
+            }),
             'content' => $this->content,
             'created_at' => toIso8601String($this->created_at),
             'updated_at' => toIso8601String($this->updated_at)
