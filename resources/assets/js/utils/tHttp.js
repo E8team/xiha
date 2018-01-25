@@ -48,7 +48,7 @@ tHttp.install = (Vue, {baseURL, router}) => {
     return config;
   }, (error) => {
     return Promise.reject(error);
-  });*/
+  }); */
   Vue.prototype.$http.interceptors.response.use((response) => {
     return response;
   }, (error) => {

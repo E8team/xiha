@@ -8,7 +8,8 @@
       :on-infinite="infinite">
       <JokeBody :key="item.id" :joke="item" v-for="item in jokes"></JokeBody>
     </scroller>
-    <JokeBodyPlaceholders class="joke_body_placeholders" v-if="jokes.length=='0'" :length="3"/>
+    <p v-if="isNull" class="no_data">Σ(ﾟдﾟ;) 笑话还没赶到</p>
+    <JokeBodyPlaceholders class="joke_body_placeholders" v-if="!isNull && jokes.length=='0'" :length="3"/>
   </div>
 </template>
 
@@ -21,7 +22,8 @@ export default {
   data () {
     return {
       jokes: [],
-      links: {}
+      links: {},
+      isNull: false
     };
   },
   beforeRouteLeave (to, from, next) {
@@ -47,10 +49,14 @@ export default {
       } else {
         this.jokes = res.data.data;
       }
+      return this.jokes.length;
     },
   },
-  mounted () {
-    this.getJokes();
+  async mounted () {
+    let len = await this.getJokes();
+    if (len === 0) {
+      this.isNull = true;
+    }
   },
   activated () {
     if (this.$store.state.lastHomePos) {
@@ -72,5 +78,11 @@ export default {
 <style scoped lang="less">
 .scroller{
   padding-top: 50px;
+}
+.no_data{
+  line-height: 60px;
+  font-size: 18px;
+  text-align: center;
+  color: #666;
 }
 </style>
