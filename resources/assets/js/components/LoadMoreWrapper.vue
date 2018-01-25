@@ -43,7 +43,7 @@ export default {
       return this.list.length;
     }
   },
-  mounted () {
+  activated () {
     this.getList(this.url);
     window.onscroll = (e) => {
       let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;

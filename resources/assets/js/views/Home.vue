@@ -43,10 +43,10 @@ export default {
       });
       let len = res.data.data.length;
       if (len > 0) {
-        this.jokes.unshift(res.data.data);
+        this.jokes.unshift(...res.data.data);
       }
       this.$message({
-        msg: `${len}条新笑话`,
+        msg: len > 0 ? `${len}条新笑话` : '什么都没有刷出来',
         type: 'info'
       });
       done();
