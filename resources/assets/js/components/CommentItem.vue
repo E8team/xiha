@@ -1,21 +1,29 @@
 <template>
   <div class="comment_item">
-    <div class="cover_wrapper">
-      <img src="https://apic.douyucdn.cn/upload/avatar/face/201609/08/f6c0c08a3f3cb1fd074fe38907ae2508_middle.jpg?rltime">
+    <div @click="$router.push({name: 'user', params: {id: joke.user.username}})" class="cover_wrapper">
+      <img :src="comment.user && comment.user.avatar.cover_url">
     </div>
-    <div class="user_name">初音ミク骑士团の奈</div>
+    <div @click="$router.push({name: 'user', params: {id: joke.user.username}})" class="user_name">{{comment.user.name}}</div>
     <div class="zan">
       <i class="iconfont icon-xin"></i>
-      <div class="zan_num">10</div>
+      <div class="zan_num">{{comment.up_votes_count}}</div>
     </div>
     <p class="comment_text">
-      周四大事件，周五分开播
+      {{comment.content}}
     </p>
     <footer>
-      <span class="comment_time">12小时前</span>
+      <span class="comment_time">{{comment.create_at | timeAgo}}</span>
     </footer>
   </div>
 </template>
+<script>
+export default {
+  name: 'CommentItem',
+  props: {
+    comment: Object
+  }
+};
+</script>
 
 <style lang="less" scoped>
 .comment_item{

@@ -7,12 +7,12 @@
       <header>
         <h3>评论<span class="comment_num">({{joke && joke.comments_count}})</span></h3>
       </header>
-      <p class="no_data">Σ(ﾟдﾟ;) 还没有评论</p>
-      <!-- <CommentItem /> -->
+      <p v-if="comments.length === 0" class="no_data">Σ(ﾟдﾟ;) 还没有评论</p>
+      <CommentItem :comment="comment" v-for="comment in comments" :key="comment.id"/>
     </div>
     <CommentEditor @send_comment="sendComment"></CommentEditor>
   </div>
-</template>
+</template>  
 
 <script>
 import TNav from '../components/TNav.vue';
@@ -24,12 +24,15 @@ export default {
   components: { TNav, JokeBody, CommentItem, JokeBodyPlaceholders, CommentEditor },
   data () {
     return {
-      joke: null
+      joke: null,
+      comments: []
     };
   },
   methods: {
-    sendComment (text) {
-      console.log(text);
+    async sendComment (text) {
+      let res = await this.$http.post(`jokes/${this.$route.params.id}/comment`, {content: text});
+      res.data.user = this.$store.state.me;
+      this.comments.push(res.data);
     }
   },
   mounted () {

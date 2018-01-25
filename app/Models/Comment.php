@@ -13,7 +13,7 @@ class Comment extends BaseModel implements CanCountUpVotesModel
 
     protected $upVotesCountField = 'up_votes_count';
 
-    protected $fillable = ['comment', 'user_id'];
+    protected $fillable = ['content', 'user_id'];
 
     public function user()
     {

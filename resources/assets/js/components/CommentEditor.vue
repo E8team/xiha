@@ -2,6 +2,7 @@
   <div class="comment_editor" :class="{'focus': focus}">
     <input @keydown.enter="$emit('send_comment', text), text = ''" v-model="text" @focus="focus = true" @blur="focus = false" placeholder="说点什么" type="text">
     <button @click="$emit('send_comment', text), text = ''" class="send_btn"><i class="iconfont icon-fasong"></i></button>
+    <div v-if="focus" class="mask"></div>
   </div>
 </template>
 
@@ -25,6 +26,15 @@ export default {
   display: flex;
   width: 100%;
   height: 35px;
+  >.mask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 12;
+  }
   &.focus{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -39,6 +49,8 @@ export default {
     border: 0;
     padding: 0 10px;
     font-size: 12px;
+    z-index: 13;
+    position: relative;
   }
   .send_btn{
     outline: none;
@@ -46,6 +58,8 @@ export default {
     border: 0;
     background-color: #fff;
     color: #999;
+    z-index: 13;
+    position: relative;
   }
 }
 </style>
