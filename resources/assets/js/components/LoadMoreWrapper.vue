@@ -13,12 +13,6 @@ export default {
   name: 'LoadMoreWrapper',
   props: {
     url: String,
-    addComment: Object
-  },
-  watch: {
-    addComment () {
-      this.list.unshift(this.addComment);
-    }
   },
   data () {
     return {
@@ -29,10 +23,19 @@ export default {
     };
   },
   methods: {
+    refresh (url) {
+      this.nextLink = null;
+      this.loading = this.isEnd = false;
+      this.getList(url || this.url);
+    },
+    addItem (item) {
+      this.list.unshift(item);
+    },
     async getList (nextLink) {
+      this.list = [];
       let res = await this.$http.get(nextLink || this.url);
       this.links = res.data.links;
-      if (nextLink) {
+      if (this.links.next) {
         this.list.push(...res.data.data);
       } else {
         this.list = res.data.data;
@@ -44,10 +47,13 @@ export default {
     }
   },
   activated () {
-    this.list = [];
+    this.nextLink = null;
+    this.loading = this.isEnd = false;
     this.getList(this.url);
   },
   mounted () {
+    this.nextLink = null;
+    this.loading = this.isEnd = false;
     window.onscroll = (e) => {
       let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
       if (document.documentElement.scrollHeight === document.documentElement.clientHeight + scrollTop) {
