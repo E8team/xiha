@@ -31,8 +31,8 @@ export default {
   methods: {
     async sendComment (text) {
       let res = await this.$http.post(`jokes/${this.$route.params.id}/comment`, {content: text});
-      res.data.user = this.$store.state.me;
-      this.comments.push(res.data);
+      res.data.data.user = this.$store.state.me;
+      this.comments.unshift(res.data.data);
     }
   },
   mounted () {
@@ -60,6 +60,7 @@ export default {
   padding: 10px;
   padding-bottom: 0;
   overflow: hidden;
+  padding-bottom: 45px;
   header{
     line-height: 30px;
     h3{
