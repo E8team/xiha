@@ -71,6 +71,7 @@ export default {
         border-radius: 50%;
         background-color: red;
         border: 1.5px solid #fff;
+        box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
       }
     }
     >.cover_wrapper{
