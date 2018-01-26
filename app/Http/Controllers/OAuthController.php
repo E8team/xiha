@@ -45,7 +45,7 @@ class OAuthController extends Controller
             // 注册
             $userModel = User::create([
                 'username' => $username,
-                'name' => $user->getName(),
+                'name' => $user->getName() ?? $username,
                 'email' => $user->getEmail(),
                 'github_url' => $user->offsetGet('html_url'),
                 'avatar_hash' => $image->hash,
