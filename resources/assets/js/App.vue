@@ -6,11 +6,16 @@
 <script>
 import { isLogin } from './utils/utils';
 export default {
+  data () {
+    return {
+      unreadTimer: null
+    };
+  },
   mounted () {
     if (isLogin()) {
       this.$store.dispatch('updateMe');
       this.getUnreadCount();
-      setInterval(() => {
+      this.unreadTimer = setInterval(() => {
         this.getUnreadCount();
       }, 10000);
     }

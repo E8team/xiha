@@ -67,6 +67,7 @@ export default {
       localStorage.removeItem('expiry_time');
       this.$router.push({name: 'home'});
       this.$message({type: 'info', msg: '已安全退出'});
+      clearInterval(this.$root.unreadTimer);
       this.$store.commit('UPDATE_ME', null);
     },
     async patchMe (filed, newValue) {
