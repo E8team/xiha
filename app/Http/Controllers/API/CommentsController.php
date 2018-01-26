@@ -14,5 +14,9 @@ class CommentsController extends APIController implements VoteController
 
     protected $resourceClass = Comment::class;
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 }
