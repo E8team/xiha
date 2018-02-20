@@ -23,7 +23,7 @@ class MeController extends APIController
      */
     public function show()
     {
-        return new UserResource(auth()->user()->load('avatar'));
+        return new UserResource(auth()->user()->loadMissing('avatar'));
     }
 
     /**

@@ -24,7 +24,7 @@ class UsersController extends APIController
      */
     public function show(User $user)
     {
-        return new UserResource($user->load('avatar'));
+        return new UserResource($user->loadMissing('avatar'));
     }
 
     /**
